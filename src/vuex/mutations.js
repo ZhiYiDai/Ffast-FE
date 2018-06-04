@@ -1,5 +1,5 @@
 import http from 'utils/HttpUtils'
-import DateUtils from 'utils/dateUtils'
+import DateUtils from 'utils/DateUtils'
 
 const mutations = {
   showLeftMenu (state, status) {

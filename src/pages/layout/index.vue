@@ -45,8 +45,7 @@
 <script>
   let timerCount = 0;
   import { Navbar, Sidebar, AppMain, Levelbar } from './index.js';
-  import WarningUtils from 'utils/WarningUtils'
-  import DateUtils from 'utils/dateUtils'
+  import DateUtils from 'utils/DateUtils'
   import Emitter from '@/utils/mixins/emitter'
   export default {
     name: 'Home',
@@ -60,33 +59,6 @@
     methods: {
       toggleClick () {
         this.menuSmall = !this.menuSmall;
-      },
-      /**
-       * 请求预警数据
-       */
-      queryWarning () {
-        let remind = this.$store.state.remind;
-        this.$store.dispatch('queryWarningData', (data) => {
-          for (let i = 0; i < data.length; i++) {
-            let remindKey = 'warning_lv_' + data[i].warningLevel;
-            // 判断是否已经提醒过
-            if (remind[remindKey] == null || !remind[remindKey].contains(data[i].id)) {
-              WarningUtils.openNotice(data[i]);
-              this.$nextTick(() => {
-                document.getElementById('warning_' + data[i].id).addEventListener('click', () => {
-                  this.$Notice.close('warning_' + data[i].id);
-                  if (this.$router.currentRoute.path === '/warning/warning') {
-                    this.broadcast('Warning', 'on-show-detail', data[i]);
-                  } else {
-                    WarningUtils.gotoWarning(this.$router, data[i]);
-                  }
-                });
-              });
-              // 加入到已提醒列表
-              this.$store.dispatch('addRemind', {key: remindKey, id: data[i].id});
-            }
-          }
-        });
       },
       queryBacklog () {
         this.$store.dispatch('queryBacklogData', (data) => {

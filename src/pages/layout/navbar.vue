@@ -111,18 +111,8 @@
             <TabPane class="msg-tabpane" :label="label1" name="name1">
               <div class="list">
                 <ul v-if="warningList.length>0">
-                  <li v-for="item in warningList" @click="gotoWarning(item)">
-                  <span style="line-height: 24px;font-weight: 800">
-                    {{item.deviceName}}
-                  </span>
-                    <span style="float: right">
-                    {{DateUtils.getSimpleDate(item.warningTime)}}
-                    <Tag
-                      :color="WarningUtils.getWarningColor(item.warningLevel)">{{WarningUtils.getWarningText(item.warningLevel)}}</Tag>
-                  </span>
-                    <div>
-                      {{item.description}}
-                    </div>
+                  <li>
+
                   </li>
                 </ul>
                 <div class="empty" v-else>
@@ -200,10 +190,9 @@
 </template>
 
 <script>
-  import DateUtils from 'utils/dateUtils'
+  import DateUtils from 'utils/DateUtils'
   import config from '@/config'
   import Emitter from '@/utils/mixins/emitter'
-  import WarningUtils from 'utils/WarningUtils'
   import { PopupEdit } from 'components/';
   /**
    * 弹出式表单参数
@@ -256,8 +245,7 @@
         userData: OperatorUtils.getUserData(),
         tableRefOptions,
         tabIndex: 0,
-        DateUtils,
-        WarningUtils
+        DateUtils
       }
     },
     computed: {
@@ -289,11 +277,7 @@
         })
       },
       gotoWarning (warning) {
-        if (this.$router.currentRoute.path === '/warning/warning') {
-          this.dispatch('Home', 'on-show-warning-detail', warning);
-        } else {
-          WarningUtils.gotoWarning(this.$router, warning);
-        }
+
       },
       tabPopperShow () {
         if (this.$store.state.warning.length > 0) {

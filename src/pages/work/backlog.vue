@@ -181,7 +181,7 @@
     ]
   };
   import FullCalendar from 'vue-fullcalendar';
-  import DateUtils from 'utils/dateUtils'
+  import DateUtils from 'utils/DateUtils'
   import {PopupEdit, CrudView} from 'components/';
   import Emitter from '@/utils/mixins/emitter'
 

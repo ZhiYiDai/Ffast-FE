@@ -96,19 +96,8 @@
           </router-link>
           <div style="height: 270px">
             <ul v-if="warningList">
-              <li v-for="item in warningList" class="curday-backlog-li" @click="WarningUtils.gotoWarning($router,item)">
-                  <span style="line-height: 24px;font-weight: 800">
-                    <Tag
-                      :color="WarningUtils.getWarningColor(item.warningLevel)">{{WarningUtils.getWarningText(item.warningLevel)}}</Tag>
-                    {{item.deviceName}}
-                  </span>
-                <span style="float: right">
-                    {{DateUtils.getSimpleDate(item.warningTime)}}
+              <li class="curday-backlog-li" >
 
-                  </span>
-                <div>
-                  {{item.description}}
-                </div>
               </li>
               <div v-if="warningList.length==0" class="empty">
                 <Icon type='information-circled'></Icon>
@@ -160,10 +149,9 @@
   </div>
 </template>
 <script>
-  import DateUtils from 'utils/dateUtils'
+  import DateUtils from 'utils/DateUtils'
   import {NumberUd} from 'components/';
   import echarts from 'echarts'
-  import WarningUtils from 'utils/WarningUtils'
 
   export default {
     data () {
@@ -172,8 +160,7 @@
         buildingListSize: 8,
         buildingList: [],
         modelingMulti: false,
-        DateUtils,
-        WarningUtils
+        DateUtils
       }
     },
     computed: {
