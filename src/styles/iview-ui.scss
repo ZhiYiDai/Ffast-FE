@@ -1,0 +1,51 @@
+.ivu-menu{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+
+.ivu-tree-arrow{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.ivu-message{
+  font-size: 14px;
+  top: 35% !important;
+  z-index: 100000;
+}
+
+.ivu-modal-content{
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ivu-card:hover{
+  box-shadow:0 0px 10px rgba(0,0,0,.08);
+}
+
+.ivu-card-head {
+  border-bottom: 1px solid #f5f7f9;
+}
+
+//.ivu-tag-closable,.ivu-tag{
+//  -webkit-transition:all 0.5s ease-in-out;
+//  -moz-transition:all 0.5s ease-in-out;
+//  -ms-transition:all 0.5s ease-in-out;
+//  -o-transition:all 0.5s ease-in-out;
+//  transition: 0.5s ease-in-out;
+//}
+
+//.ivu-select-dropdown{
+//  z-index: 1065;
+//}

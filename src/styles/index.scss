@@ -1,0 +1,63 @@
+@import './iview-ui.scss';
+
+.ease-in-out {
+  transition: .2s ease-in-out;
+}
+
+.ease-in {
+  transition: .2s ease-in;
+}
+
+.linear {
+  transition: .2s linear;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background-color: #e6e6e6;
+}
+
+.trans-fadeout{
+  -webkit-transition:all 0.1s linear;
+  -moz-transition:all 0.1s linear;
+  -ms-transition:all 0.1s linear;
+  -o-transition:all 0.1s linear;
+  transition:all 0.1s linear;
+}
+
+.hide {
+  opacity: 0;
+  height: 0;
+}
+
+.main-view {
+  padding: 0px 10px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.main-view-full{
+  min-height: calc(100vh - 120px);
+}
+
+.ivu-notice-with-normal:after {
+  background: #5f5f5f;
+}
+
+.left-col {
+  padding: 10px 8px 0px 0px;
+  border-right: #F5F7F9 2px solid;
+  min-height: calc(100vh - 120px);
+}
+
+.right-col {
+  padding: 10px 20px;
+  margin-left: -2px;
+  border-left: #F5F7F9 2px solid;
+  min-height: calc(100vh - 120px);
+}
