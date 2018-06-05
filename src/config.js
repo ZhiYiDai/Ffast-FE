@@ -6,8 +6,8 @@ module.exports = {
   iconFontUrl: '',
   whiteList: ['/login', '/reset'],
   apiPrefix: '/api',
-  devHost: 'http://39.107.104.190:6060/',
-  pubHost: 'http://39.107.104.190:6060/',
+  devHost: 'http://39.107.104.190:6060',
+  pubHost: 'http://39.107.104.190:6060',
   captchaEnable: true,
   api: {
     userLogin: '/auth/login',

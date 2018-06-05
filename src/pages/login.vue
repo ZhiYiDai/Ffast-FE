@@ -105,6 +105,7 @@
             </i-button>
           </FormItem>
           <div style="padding: 0px 8px;">
+            Username:<b>admin</b>  Password:<b>123456</b>
             <router-link style="float: right;" to="/">忘记密码</router-link>
           </div>
         </i-form>

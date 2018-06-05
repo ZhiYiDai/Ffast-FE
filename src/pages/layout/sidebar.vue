@@ -39,7 +39,7 @@
   }
 
   .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened {
-    background-color: #333;
+    background-color: #333 !important;
   }
 
   .layout-ceiling-main a {
@@ -95,11 +95,11 @@
   }
 
   .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
-    background: #3E3E3E;
+    background: #3E3E3E !important;
   }
 
   .ivu-menu-dark {
-    background: #3e3e3e;
+    background: #3e3e3e !important;
   }
 
   .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover {
