@@ -36,7 +36,6 @@ const loginData = {
 // 登录
 export function login() {
   return {
-    // isOpen: false,
     url: '/auth/login',
     type: 'post',
     data: loginData
@@ -46,12 +45,11 @@ export function login() {
 // 退出
 export function logout() {
   return {
-    // isOpen: false,
     url: '/auth/logout',
     type: 'post',
     data: {
       'msg': 'success',
-      'code': 0
+      'success': true
     }
   }
 }

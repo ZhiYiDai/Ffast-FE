@@ -1,13 +1,13 @@
 module.exports = {
   appId: 'ffast',
   name: 'FFast',
-  footerText: '2012-2017 © FFast',
+  footerText: 'FFast',
   logo: '',
   iconFontUrl: '',
-  whiteList: ['/login', '/authredirect', '/reset', '/sendpwd'],
+  whiteList: ['/login', '/reset'],
   apiPrefix: '/api',
-  devHost: 'http://127.0.0.1:8080',
-  pubHost: '/zzbim-web',
+  devHost: 'http://39.107.104.190:6060/',
+  pubHost: 'http://39.107.104.190:6060/',
   captchaEnable: true,
   api: {
     userLogin: '/auth/login',
