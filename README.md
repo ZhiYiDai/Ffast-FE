@@ -239,7 +239,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 
 > 12.editor(基于vue-quill-editor富文本)
 
-# 代码样例
+## 代码样例
 ``` bash
 <template>
   <FormDynamic ref="dynamic" :data="dynamicData" :label-width="100"></formDynamic>
@@ -253,6 +253,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
           type: 'text',
           span: 12,
           label: '资源名',
+          // 表单验证
           rules: {required: true}
         },
         {name: 'parentId', type: 'treeSelect', dataFromTree: true, span: 12, label: '父资源'}
@@ -327,6 +328,15 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
   [],     //第三行
 ]
 也可以设置为span：24 独占一行
+```
+## 表单验证
+``` bash
+rules: {
+      required: true, //开启表单验证
+      type: 'number', //验证类型
+      message: '分类不能为空'//提示信息
+}
+具体请看https://github.com/yiminghe/async-validator
 ```
 
 # 您还可以使用基于动态表单组件开发的其他组件
