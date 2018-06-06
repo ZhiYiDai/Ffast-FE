@@ -6,7 +6,7 @@
 
     width: 100%;
     height: 100%;
-    background-image: url(../../static/assets/img/login_bg.jpg);
+    background-image: url(../../static/assets/img/login_bg.png);
     background-size: cover;
     background-position: 50%;
   }
@@ -15,9 +15,9 @@
     top: 0;
     width: 340px;
     padding: 30px 20px 16px 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
-    box-shadow: 0px 20px 100px rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 0px 100px rgba(255, 255, 255, 0.4);
   }
 
   .captchaImage {
