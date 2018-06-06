@@ -17,6 +17,9 @@ const GeneratorPage = resolve => require(['pages/sys/generator'], resolve)
 const BacklogPage = resolve => require(['pages/work/backlog'], resolve)
 
 
+const FormDynamicPage = resolve => require(['pages/example/FormDynamicPage'], resolve)
+
+
 const routes = [
   {
     path: '/',
@@ -41,7 +44,11 @@ const routes = [
       /**
        * 办公
        */
-      {path: '/work/backlog', component: BacklogPage, name: '待办事项'}
+      {path: '/work/backlog', component: BacklogPage, name: '待办事项'},
+      /**
+       * 组件
+       */
+      {path: '/example/formDynamic', component: FormDynamicPage, name: 'FormDynamic'}
 
     ]
   },
