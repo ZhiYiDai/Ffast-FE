@@ -34,7 +34,7 @@
             <!--输入框-->
             <template v-if="item.type==='text'">
               <i-input
-                :type="item.textarea==null?'text':'textarea'"
+                :type="getInputType(item)"
                 v-model="fromData[item.name]"
                 :placeholder="getPlaceholder(item)"
                 :readonly="item.readonly"
@@ -203,7 +203,6 @@
             </template>
             <!--图片上传-->
             <template v-else-if="item.type==='imgUpload'">
-              {{fromData[item.name]}}
               <ImgUpload v-model="fromData[item.name]"
                          :data="item.data"
                          :param="item.param"
@@ -231,7 +230,7 @@
 
             <!--富文本-->
             <template v-else-if="item.type==='editor'">
-              <FormEditor v-model="fromData[item.name]"></FormEditor>
+              <FormEditor v-model="fromData[item.name]" :placeholder="getPlaceholder(item)"></FormEditor>
             </template>
 
 
@@ -270,7 +269,7 @@
       colHeight: {},
       paddingRight: {}
     },
-    data () {
+    data() {
       return {
         keys: null,
         fromData: {},
@@ -278,26 +277,29 @@
       };
     },
     computed: {
-      colStyle () {
+      colStyle() {
         return {
           height: this.colHeight + 'px',
           paddingRight: this.paddingRight + 'px'
         }
       }
     },
-    created () {
+    created() {
       this.initForm(this.data);
     },
-    mounted () {
+    mounted() {
     },
     methods: {
-      initForm (data) {
+      getInputType(item) {
+        return item.textarea == null ? item.password === true ? 'password' : 'text' : 'textarea';
+      },
+      initForm(data) {
         for (let i in data) {
           for (let j in data[i]) {
             let obj = data[i][j];
             if (obj.rules != null) {
               if (obj.rules.message == null) {
-                obj.rules.message = obj.label + "不能为空";
+                obj.rules.message = obj.label + '不能为空';
               }
               if (obj.rules.trigger == null) {
                 obj.rules.trigger = 'blur';
@@ -310,26 +312,29 @@
         }
         this.reset();
       },
-      getPlaceholder (item) {
+      getPlaceholder(item) {
         if (this.placeholderLabel) {
           return item.label;
         }
-
         let result;
-        switch (item.type) {
-          case 'text':
-            result = item.disabled || item.readonly ? '' : '请输入...';
-            break;
-          case 'popText':
-            result = item.disabled || item.readonly ? '' : '请选择...';
-            break;
-          default:
-            result = '';
-            break;
+        if (item.placeholder == null) {
+          switch (item.type) {
+            case 'text':
+              result = item.disabled || item.readonly ? '' : '请输入...';
+              break;
+            case 'popText':
+              result = item.disabled || item.readonly ? '' : '请选择...';
+              break;
+            default:
+              result = '';
+              break;
+          }
+        } else {
+          result = item.placeholder;
         }
         return result;
       },
-      checkAll (data, name) {
+      checkAll(data, name) {
         let checkArr = [];
         for (let i = 0; i < data.length; i++) {
           checkArr.push(data[i].value);
@@ -337,7 +342,7 @@
         this.$set(this.fromData, name, checkArr);
         this.$set(this.mData[name], 'checkAll', true);
       },
-      handleCheckAll (item) {
+      handleCheckAll(item) {
         let checkAll = this.mData[item.name].checkAll;
         if (checkAll) {
           this.$set(this.fromData, item.name, []);
@@ -348,7 +353,7 @@
         }
         item.onChange(item, this.mData, this.fromData);
       },
-      checkGroupChange (event, item) {
+      checkGroupChange(event, item) {
         let selected = event.length;
         let orign = this.mData[item.name].data.length;
         if (selected === orign) {
@@ -364,7 +369,7 @@
       /**
        * 重置
        */
-      reset () {
+      reset() {
         this.keys = [];
         // 设置初始默认值
         for (var name in this.mData) {
@@ -392,7 +397,7 @@
        * @param success
        * @param error
        */
-      submit (success, error) {
+      submit(success, error) {
         this.$refs.fromData.validate((valid) => {
           let data = this.fromData;
           if (valid) {
@@ -434,14 +439,14 @@
           }
         })
       },
-      getData () {
+      getData() {
         return this.fromData;
       },
       /**
        * 设置表单数据
        * @param fromData
        */
-      setFormData (fromData) {
+      setFormData(fromData) {
         this.reset();
         // 设置表单传进来的值
         for (let name in fromData) {
@@ -466,7 +471,7 @@
       }
     },
     watch: {
-      data (newVal, oldVal) {
+      data(newVal, oldVal) {
         this.initForm(newVal);
       }
     },

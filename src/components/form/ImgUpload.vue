@@ -85,6 +85,7 @@
       multiple
       with-credentials
       type="drag"
+      :headers="postHeaders"
       :action="uploadUrl"
       style="display: inline-block;width:48px;">
       <div style="width: 48px;height:48px;line-height: 58px;">
@@ -119,7 +120,8 @@
         imagesValue: [],
         photoViewerImg: null,
         photoViewerVisible: false,
-        curIndex: 0
+        curIndex: 0,
+        postHeaders: {}
       }
     },
     methods: {
@@ -160,6 +162,7 @@
         });
       },
       handleBeforeUpload() {
+        this.postHeaders.Authorization = OperatorUtils.getToken();
         const check = this.uploadList.length < this.max;
         if (!check) {
           this.$Message.warning('最多只能上传 ' + this.max + ' 张图片。');
