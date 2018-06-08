@@ -175,41 +175,41 @@
        */
       queryData () {
         this.selection = null;
-        this.$emit('on-selection-change', null)
-        if (this.dataUrl == null || this.loading == true) {
-          return
+        this.$emit('on-selection-change', null);
+        if (this.dataUrl == null || this.loading === true) {
+          return;
         }
-        this.loading = true
-        let param = Object.assign(this.pageParam, this.param)
+        this.loading = true;
+        let param = Object.assign(JSON.parse(JSON.stringify(this.pageParam)), this.param);
         this.$http.apiPost(this.dataUrl, param).then((res) => {
-          this.loading = false
+          this.loading = false;
           if (!res.success) {
-            this.$http.handleError(res)
+            this.$http.handleError(res);
           } else {
-            this.total = res.data.total
-            this.tableData = res.data.rows
+            this.total = res.data.total;
+            this.tableData = res.data.rows;
           }
-        })
+        });
       },
       changePage (page) {
-        this.pageParam.page = page
-        this.queryData()
+        this.pageParam.page = page;
+        this.queryData();
       },
       changePageSize (pageSize) {
-        this.pageParam.pageSize = pageSize
-        this.queryData()
+        this.pageParam.pageSize = pageSize;
+        this.queryData();
       },
       selectionChange (selection) {
         this.selection = selection;
-        this.$emit('on-selection-change', this.selection)
+        this.$emit('on-selection-change', this.selection);
       },
       rowDblclick (data, index) {
-        this.$emit('on-row-dblclick', data, index)
+        this.$emit('on-row-dblclick', data, index);
       },
       rowClick (data, index) {
-        this.$refs.table.selectAll(false)
-        this.$refs.table.toggleSelect(index)
-        this.$emit('on-row-click', data, index)
+        this.$refs.table.selectAll(false);
+        this.$refs.table.toggleSelect(index);
+        this.$emit('on-row-click', data, index);
       },
       clearCurrentRow () {
         this.$refs['table'].clearCurrentRow();
@@ -250,7 +250,6 @@
                 return null;
               };
             }
-            //
             else {
 
             }

@@ -115,22 +115,22 @@
       }
     },
     computed: {
-      isSingle () {
+      isSingle() {
         return !(this.tableOptions.selection !== null && this.tableOptions.selection.length === 1);
       },
-      isMultiple () {
+      isMultiple() {
         return !(this.tableOptions.selection != null && this.tableOptions.selection.length > 0);
       },
-      createPerms () {
+      createPerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':create';
       },
-      updatePerms () {
+      updatePerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':update';
       },
-      deletePerms () {
+      deletePerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':delete';
       },
-      isPopupEdit () {
+      isPopupEdit() {
         return this.tableOptions.editOptions && !this.tableOptions.editOptions.editPage;
       }
     },
@@ -141,7 +141,7 @@
         }
         return false;
       },
-      refreshTable (type) {
+      refreshTable(type) {
         this.tableOptions.selection = [];
         this.$refs.table.queryData();
         let tree = this.tableOptions.treeView;
@@ -150,25 +150,28 @@
           tree.$refs['tree'].queryData();
         }
       },
-      opened (from, data) {
+      opened(from, data) {
         if (this.tableOptions.editOptions.opened) {
           this.tableOptions.editOptions.opened(from, data);
         }
       },
-      setFromAfter (from, data) {
+      setFromAfter(from, data) {
         if (this.tableOptions.editOptions.setFromAfter) {
           this.tableOptions.editOptions.setFromAfter(from, data);
         }
       },
-      search () {
+      search() {
         this.$refs.searchFrom.submit((data) => {
           for (let i in data) {
-            let val = data[i] === '' ? null : data[i];
-            this.$set(this.tableOptions.param, i, val);
+            if (data[i] === null || data[i] === '') {
+              this.$delete(this.tableOptions.param, i);
+            } else {
+              this.$set(this.tableOptions.param, i, data[i]);
+            }
           }
         });
       },
-      getSelection () {
+      getSelection() {
         if (this.tableOptions.selection.length <= 0) {
           this.$Message.error('未选择操作项！');
           return null;
@@ -176,20 +179,20 @@
           return this.tableOptions.selection;
         }
       },
-      editSuccess (res) {
+      editSuccess(res) {
         this.refreshTable();
       },
       /**
        * 表格复选框选中事件
        */
-      selectionChange (selection) {
+      selectionChange(selection) {
         this.tableOptions.selection = selection;
         this.$emit('on-selection-change', selection);
       },
       /**
        * 双击表格行
        */
-      rowDblclick (data) {
+      rowDblclick(data) {
         if (this.tableOptions.updateUrl && this.tableOptions.editOptions) {
           this.$refs.popupEdit.open({
             title: '编辑' + this.tableOptions.title,
@@ -200,12 +203,12 @@
       /**
        * 单击表格行
        */
-      rowClick (data) {
+      rowClick(data) {
       },
       /**
        * 添加表格数据
        */
-      showEdit (postUrl, title, data) {
+      showEdit(postUrl, title, data) {
         let action = {
           title: title,
           postUrl: postUrl
@@ -220,7 +223,7 @@
           this.$refs.popupEdit.open(action, data);
         }
       },
-      tableAddData () {
+      tableAddData() {
         let data = {}
         if (this.tableOptions != null) {
           data[this.categoryField] = this.tableOptions.param[this.categoryField];
@@ -266,7 +269,7 @@
       /**
        * 表格字段绑定数据
        */
-      columnRenderData () {
+      columnRenderData() {
         if (this.tableOptions.columns != null) {
           for (let i = 0; i < this.tableOptions.columns.length; i++) {
             let col = this.tableOptions.columns[i];
