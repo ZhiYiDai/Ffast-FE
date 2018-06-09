@@ -16,12 +16,12 @@ npm run build
 
 ```
 
-# Ffast-FE 是什么
+# 简介
 ``` bash
 Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案,已实现基本的系统管理页面,您可以用其中的组件快速开发属于你的页面。
 已实现页面（整体布局界面，用户管理，角色管理，字典管理，权限菜单，接口测试，系统日志）
 开发中的页面（代码生成）
-演示地址 http://www.ffast.cn/  备用地址http://39.107.104.190/ffast
+演示地址 http://demo.ffast.cn/  备用地址http://39.107.104.190/ffast
 ```
 
 
@@ -210,8 +210,6 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 ```
 
 
-
-
 # 灵活丰富的动态表单组件(FormDynamic)
 
 ## 支持十多种表单组件：
@@ -239,84 +237,290 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 
 > 12.editor(基于vue-quill-editor富文本)
 
+> 13.PopupSelect(弹出式选择)
+
+> 14.Switch(开关选择)
+
 ## 代码样例
 ``` bash
 <template>
-  <FormDynamic ref="dynamic" :data="dynamicData" :label-width="100"></formDynamic>
+  <div class="main-view main-view-full" style="padding-top: 50px">
+    <row>
+      <i-col span="24">
+        <FormDynamic ref="dynamic1" v-model="fromData" :data="dynamic1" :label-width="120">
+        </FormDynamic>
+      </i-col>
+    </row>
+    <PopupEdit ref="popupEdit"
+               :width="1000"
+               :dynamic="dynamic1"
+               @on-success="editSuccess"
+               :label-width="120">
+    </PopupEdit>
+    <PopupSelect ref="popSelect" :content="userPage"></PopupSelect>
+  </div>
 </template>
 <script>
-    dynamicData: [
+  import {FormDynamic, PopupEdit, PopupSelect} from 'components/';
+  let self = null;
+  const dynamic1 = [
       [
-        {name: 'id', hidden: true},
+        {type: 'title', span: 24, text: 'Input'}
+      ],
+      [
         {
-          name: 'name',
+          name: 'numberData',
+          type: 'number',
+          span: 6,
+          // 最小值
+          min:1,
+          // 最大值
+          max:80010
+          label: 'Number'
+        },
+        {
+          name: 'textData',
           type: 'text',
-          span: 12,
-          label: '资源名',
-          // 表单验证
-          rules: {required: true}
+          span: 6,
+          label: 'text',
+          value: 'DefaultValue',
+          rules: {required: true, type: 'string'}
         },
-        {name: 'parentId', type: 'treeSelect', dataFromTree: true, span: 12, label: '父资源'}
+        {
+          name: 'passwordData',
+          type: 'text',
+          span: 6,
+          password: true,
+          label: 'PasswordText',
+          rules: {required: true, type: 'string', message: '密码不能为空'}
+        },
+        {
+          name: 'textarea',
+          type: 'text',
+          placeholder: '多行文本输入框',
+          span: 6,
+          label: 'TextareaLabel',
+          textarea: {minRows: 1, maxRows: 6}
+        }
+      ], [
+        {type: 'title', span: 24, text: 'date'}
+      ], [
+        {name: 'date1', type: 'date', span: 6, label: 'DateLabel'},
+        {name: 'date2', type: 'datetime', span: 6, label: 'DateTimeLabel'},
+        {name: 'date3', type: 'datetimerange', span: 6, label: 'Datetimerange'}
       ],
       [
-        {name: 'url', type: 'text', span: 24, label: '菜单Url'}
-      ],
-      [
-        {name: 'identity', type: 'text', span: 12, label: '标识符'},
-        {name: 'icon', type: 'text', span: 12, label: '图标'}
-
-      ],
-      [
-        {name: 'weight', type: 'text', span: 12, label: '权重'}
+        {type: 'title', span: 24, text: 'DataSelect'}
       ],
       [
         {
-          name: 'status',
-          openText: '显示',
-          closeText: '隐藏',
-          type: 'switch',
-          span: 12,
-          label: '状态',
-          value: 1,
-          trueValue: 1,
-          falseValue: 0
+          name: 'selectData',
+          type: 'select',
+          span: 8,
+          value: 0,
+          label: 'SelectLabel',
+          data: [
+            {label: '选项1', value: 0}, {label: '选项2', value: 1},
+            {label: '选项3', value: 2}, {label: '选项4', value: 3}
+          ],
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
         },
         {
-          name: 'resType',
+          name: 'selectData2',
+          type: 'select',
+          span: 6,
+          value: 0,
+          label: 'URLSelectLabel',
+          // value 字段名
+          valField: 'id',
+          // label 字段名
+          textField: 'name',
+          // 通过设置数据url地址进行获取
+          dataUrl: '/sys/dict/get?type=job',
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
+        },
+        {
+          name: 'selectData3',
+          type: 'select',
+          span: 6,
+          value: 0,
+          label: 'DictSelectLabel',
+          // 直接取字典数据
+          dict: 'job',
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
+        }
+      ], [
+        {type: 'title', span: 24, text: 'Title'}
+      ], [
+        {
+          name: 'radioData',
           type: 'radio',
-          span: 12,
-          label: '类型',
-          value: 1,
-          data: [{label: '菜单', value: 1}, {label: '权限', value: 2}],
-          rules: {required: true, type: 'number'}
+          span: 6,
+          value: 0,
+          label: 'RadioLabel',
+          data: [
+            {label: '选项1', value: 0}, {label: '选项2', value: 1},
+            {label: '选项3', value: 2}, {label: '选项4', value: 3}
+          ],
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
+        },
+        {
+          name: 'checkboxData',
+          type: 'checkbox',
+          span: 8,
+          label: 'CheckboxLabel',
+          data: [
+            {label: '选项1', value: 0}, {label: '选项2', value: 1},
+            {label: '选项3', value: 2}, {label: '选项4', value: 3}
+          ],
+          enableCheckAll: true,
+          checkAllLabel: '全选',
+          checkAll: true,
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
+        },
+        {
+          name: 'deviceTypeId',
+          type: 'treeSelect',
+          span: 8,
+          label: 'TreeSelectLabel',
+          // 如果是CrudView 支持从左边树绑定数据，select组件同样支持
+          dataFromTree: true,
+          textField: 'name',
+          valField: 'id',
+          dataUrl: '/sys/res/list',
+          onChange: (val, from, data) => {
+            alert('onChange');
+          }
+        },
+        {
+          name: 'popSelectId',
+          span:
+            8,
+          label:
+            'PopupSelectLabel',
+          type:
+            'popText',
+          textField:
+            'popSelectName',
+          onClick(fromData) {
+            self.$refs['popSelect'].open((selection) => {
+              console.log(selection[0].id);
+              self.$set(fromData, 'popSelectId', selection[0].id);
+              self.$set(fromData, 'popSelectName', selection[0].username);
+            })
+          }
         }
       ],
       [
         {
-          name: 'addBaseCrud',
-          type: 'switch',
-          openText: '是',
-          closeText: '否',
-          span: 12,
-          label: '添加基础权限',
-          value: false
+          name: 'imgData',
+          // 最多只能上传2张
+          max: 2,
+          type: 'imgUpload',
+          span: 24,
+          label: 'ImgUploadLabel'
+        },
+        {name: 'editor', type: 'editor', span: 24, label: 'EditorLabel', placeholder: '富文本编辑器'}
+      ],
+      [
+        {
+          name: 'button', type: 'buttons',
+          span: 24,
+          data: [
+            {
+              label: 'SetData',
+              onClick() {
+                // 给表单设置数据
+                self.$refs.dynamic1.setFormData({numberData: 10001, textData: 'SetData'})
+              }
+            },
+            {
+              label: 'GetFormData',
+              onClick() {
+                self.$refs.dynamic1.submit((param) => {
+                  console.log(param);
+                  alert(JSON.stringify(param))
+                }, (res) => {
+                  // 表单验证失败
+                });
+              }
+            },
+            {
+              // 弹出窗口编辑表单
+              label: 'PopupWindow',
+              onClick() {
+                self.$refs.popupEdit.open({
+                  title: 'PopupEditWindow',
+                  // 确认提交url
+                  postUrl: null
+                }, self.fromData);
+              }
+            },
+            {
+              label: 'GotoEditPage',
+              onClick() {
+                self.editOptions.editSuccess = self.editSuccess;
+                let action = {
+                  // 窗口标题
+                  title: 'title',
+                  // 确认提交请求url
+                  postUrl: ''
+                }
+                self.$router.push({
+                  path: self.$router.currentRoute.path + '/edit',
+                  query: {options: self.editOptions, action: action, data: self.fromData}
+                })
+              }
+            }
+          ]
         }
       ]
-    ]
-
-  import FormDynamic from 'components/FormDynamic'
+    ];
+  /**
+   * 弹出式表单参数
+   */
+  const editOptions = {
+    width: 1200,
+    labelWidth: 120,
+    dynamic: dynamic1
+  };
 
   export default {
     data() {
       return {
-        dynamicData,
+        editOptions,
+        dynamic1,
+        fromData: {}
       }
     },
-    computed: {},
-    methods: {},
-    mounted() {
+    computed: {
+      // 弹出选择页面
+      userPage() {
+        return import('pages/sys/user');
+      }
     },
-    components: {FormDynamic}
+    methods: {
+      // 编辑成功
+      editSuccess(res) {
+        console.log(res);
+      }
+    },
+    mounted() {
+      self = this;
+    },
+    components: {
+      FormDynamic, PopupEdit, PopupSelect
+    }
   }
 </script>
 ```
@@ -360,6 +564,7 @@ rules: {
 
 > PermsValid(权限验证)
 
+
 ...
 
 # 引用关系
@@ -373,4 +578,4 @@ CrudView -> CrudTable -> DataTable  -> IView Table
                       -> Edit       -> FormDynamic
 ```
 # 后端解决方案
-> （Ffast java）文档整理中...
+>  https://github.com/ZhiYiDai/Ffast-Java （Ffast java）文档整理中...
