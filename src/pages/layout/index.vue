@@ -72,9 +72,9 @@
       this.$on('on-show-warning-detail', (data) => {
         this.broadcast('Warning', 'on-show-detail', data);
       });
-      return;
+
       // this.queryWarning();
-      // this.queryBacklog();
+      this.queryBacklog();
       // setInterval(() => {
       //   this.queryWarning();
       //   timerCount++;

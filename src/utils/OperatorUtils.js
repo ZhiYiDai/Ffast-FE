@@ -13,7 +13,7 @@ const OperatorUtils = {
   permsData: null,
   token: null,
   main: null,
-  postLogined () {
+  postLogined() {
     if (!isPost) {
       isPost = true;
       http.http.apiPost(config.api.isLogined).then((res) => {
@@ -24,12 +24,12 @@ const OperatorUtils = {
       });
     }
   },
-  isLogined (router) {
+  isLogined(router) {
     routerPush = router;
     this.postLogined();
     return Lockr.get(prefix + 'token') ? true : false
   },
-  setBaseData (data) {
+  setBaseData(data) {
     Lockr.set(prefix + 'token', data.token);
     Lockr.set(prefix + 'userData', data.userData);
     Lockr.set(prefix + 'menuData', data.menuData);
@@ -38,9 +38,8 @@ const OperatorUtils = {
     this.menuData = null;
     this.permsData = null;
     this.token = null;
-    this.main = data.userData.main;
   },
-  clear () {
+  clear() {
     Lockr.set(prefix + 'token', null)
     Lockr.set(prefix + 'userData', null)
     Lockr.set(prefix + 'menuData', null)
@@ -51,20 +50,29 @@ const OperatorUtils = {
     this.token = null
     this.main = null
   },
-  getUserData () {
+  getUserData() {
     return this.userData || Lockr.get(prefix + 'userData')
   },
-  getMenuData () {
+  getMenuData() {
     return this.menuData || Lockr.get(prefix + 'menuData')
   },
-  getPermsData () {
+  getPermsData() {
     return this.permsData || Lockr.get(prefix + 'permsData')
   },
-  getToken () {
+  getToken() {
     return this.token || Lockr.get(prefix + 'token')
   },
-  getMain () {
-    return this.main || this.getUserData().main
+  getMain() {
+    if (this.main === null) {
+      let main = JSON.parse(this.getUserData().main);
+      if (main === null || main.length === 0 || main[0] === null) {
+        this.main = '/index';
+      } else {
+        this.main = main[0];
+      }
+    }
+
+    return this.main;
   }
 }
 

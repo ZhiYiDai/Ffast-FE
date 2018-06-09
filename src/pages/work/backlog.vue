@@ -39,6 +39,7 @@
   .curbacklog li {
     font-size: 14px;
     line-height: 24px;
+    list-style-type:none;
   }
 
 </style>

@@ -23,7 +23,8 @@
     cursor: pointer;
     padding: 5px;
     border-bottom: #F5F7F9 1px solid;
-    cursor: pointer
+    cursor: pointer;
+    list-style-type: none;
   }
 
   .backlog li:last-child {
@@ -34,7 +35,7 @@
     background-color: #ebf7ff
   }
 
-   .empty {
+  .empty {
     font-size: 16px;
     text-align: center;
     color: #80848f;
@@ -53,71 +54,21 @@
 
 <template>
   <div class="sys-index">
-    <Row>
+    <Row >
       <i-col span="24">
-
-        <Card :bordered="false">
-          <h3 slot="title">楼 宇</h3>
-          <router-link slot="extra" to="/warning/warning">
-            更多
-            <Icon type="ios-arrow-right"></Icon>
-          </router-link>
-          <Carousel :dots="modelingMulti?'inside':'none'" :arrow="modelingMulti?'hover':'never'">
-            <CarouselItem v-for="(list,index) in buildingList" :key="'ct_'+index">
-              <i-col span="4" v-for="item in list" :key="item.id">
-                <a :href="'/#/modeling#'+item.id" target="_blank" class="building-a" style="width: 100%;">
-                  <Card class="building-card" :padding="8" :bordered="false">
-                    <div style="text-align:center;">
-                      <img style="height:200px;width: 100%" :src="imgUrl+item.pictureId">
-                      <span>{{item.name}}</span>
-                    </div>
-                  </Card>
-                </a>
-              </i-col>
-            </CarouselItem>
-          </Carousel>
-        </Card>
-      </i-col>
-    </Row>
-
-    <Row style="padding-top: 20px">
-      <i-col span="24">
-
+        <IndexCharts></IndexCharts>
       </i-col>
     </Row>
 
     <Row style="padding-top: 20px" :gutter="20">
-      <i-col span="12" class="not-padding backlog">
-        <Card :bordered="false">
-          <h3 slot="title">预警通知</h3>
-          <router-link slot="extra" to="/warning/warning">
-            更多
-            <Icon type="ios-arrow-right"></Icon>
-          </router-link>
-          <div style="height: 270px">
-            <ul v-if="warningList">
-              <li class="curday-backlog-li" >
-
-              </li>
-              <div v-if="warningList.length==0" class="empty">
-                <Icon type='information-circled'></Icon>
-                暂无报警
-              </div>
-            </ul>
-
-
-          </div>
-        </Card>
-      </i-col>
-
-      <i-col span="12" class="not-padding backlog">
+      <i-col span="6" class="not-padding backlog">
         <Card :bordered="false">
           <h3 slot="title">待办事项</h3>
           <router-link slot="extra" to="/work/backlog">
             更多
             <Icon type="ios-arrow-right"></Icon>
           </router-link>
-          <div style="height: 270px">
+          <div style="height: 520px">
             <ul v-if="backlogList">
               <li v-for="item in backlogList" class="curday-backlog-li" @click="backlogItemClick(item)">
                 <Tag :color="item.priority==1?'red':'default'">
@@ -151,10 +102,10 @@
 <script>
   import DateUtils from 'utils/DateUtils'
   import {NumberUd} from 'components/';
-  import echarts from 'echarts'
+  import IndexCharts from './IndexCharts'
 
   export default {
-    data () {
+    data() {
       return {
         imgUrl: HOST + '/sys/attach/getImg?id=',
         buildingListSize: 8,
@@ -164,15 +115,15 @@
       }
     },
     computed: {
-      warningList () {
+      warningList() {
         return this.$store.state.warning;
       },
-      backlogList () {
+      backlogList() {
         return this.$store.state.backlog;
       }
     },
     methods: {
-      backlogItemClick(item){
+      backlogItemClick(item) {
         this.$router.push({
           path: '/work/backlog',
           name: '待办事项',
@@ -182,9 +133,9 @@
         })
       },
     },
-    mounted () {
+    mounted() {
 
     },
-    components: {NumberUd}
+    components: {NumberUd, IndexCharts}
   }
 </script>

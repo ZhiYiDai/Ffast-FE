@@ -56,6 +56,7 @@
     padding: 5px;
     border-bottom: 1px solid #e9eaec;
     cursor: pointer;
+    list-style-type: none;
   }
 
   .msg-tabpane ul li:hover {

@@ -46,9 +46,6 @@ router.beforeEach((to, from, next) => {
     }
     else if (to.path === '/') {
       let main = OperatorUtils.getMain();
-      if (main === null) {
-        main = "index";
-      }
       next(main);
       NProgress.done();
     }

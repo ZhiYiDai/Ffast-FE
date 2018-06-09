@@ -60,7 +60,8 @@
     methods: {
       getBreadcrumb() {
         let matched = [];
-        matched.push({name: '首页', url: '/', icon: 'home'})
+        let mainUrl= OperatorUtils.getMain();
+        matched.push({name: '首页', url: mainUrl, icon: 'home'})
         let path = this.$route.path;
         let menuData = OperatorUtils.getMenuData();
         let isEditPage = false;
@@ -83,7 +84,7 @@
             this.addTab(md);
           }
         }
-        if (matched.length === 1 && path !== OperatorUtils.getMain()) {
+        if (matched.length === 1 && path !== mainUrl) {
           matched.push({name: this.$route.name, url: path});
         }
         if (isEditPage) {

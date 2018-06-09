@@ -2,7 +2,7 @@
 
 > 基于vue iview后台管理系统前端快速开发解决方案
 
-## Build Setup
+## Install
 
 ``` bash
 # install dependencies
@@ -18,12 +18,14 @@ npm run build
 
 # 简介
 ``` bash
-Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案,已实现基本的系统管理页面,您可以用其中的组件快速开发属于你的页面。
-已实现页面（整体布局界面，用户管理，角色管理，字典管理，权限菜单，接口测试，系统日志）
+Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案,以JSON数据驱动页面,几句代码即可快速开发属于你的页面。
+已实现页面（整体布局界面，用户管理，角色管理，字典管理，权限菜单，接口测试，系统日志，待办事项）
 开发中的页面（代码生成）
 演示地址 http://demo.ffast.cn/  备用地址http://39.107.104.190/ffast
 ```
 
+# 后端解决方案Ffast-Java
+>  https://github.com/ZhiYiDai/Ffast-Java 
 
 ## 一个简单的增删改表格页面
 ``` bash
@@ -577,5 +579,4 @@ CrudView -> CrudTable -> DataTable  -> IView Table
                       -> PopupEdit  -> FormDynamic
                       -> Edit       -> FormDynamic
 ```
-# 后端解决方案
->  https://github.com/ZhiYiDai/Ffast-Java （Ffast java）文档整理中...
+
