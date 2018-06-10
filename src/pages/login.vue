@@ -6,14 +6,14 @@
 
     width: 100%;
     height: 100%;
-    background-image: url(../../static/assets/img/login_bg.png);
+    background-image: url(../../static/assets/img/login_bg.jpg);
     background-size: cover;
     background-position: 50%;
   }
 
   .login-panel {
     top: 0;
-    width: 340px;
+    width: 350px;
     padding: 30px 20px 16px 20px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
@@ -54,10 +54,10 @@
     top: 0;
   }
 
+
   .layout-logo {
     height: 60px;
-    margin-bottom: 20px;
-    background: url("../../static/assets/img/logo.png") no-repeat center;
+    background: url("../../static/assets/img/logo2.png") no-repeat center;
   }
 
 </style>
@@ -82,7 +82,8 @@
       <div class="login-panel">
         <i-form ref="formLogin" :model="formLogin" :rules="ruleInline">
           <FormItem class="login-title">
-            <h2 >系统登录</h2>
+
+            <div class="layout-logo"></div>
           </FormItem>
 
           <FormItem prop="username">

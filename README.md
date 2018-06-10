@@ -19,10 +19,17 @@ npm run build
 # 简介
 ``` bash
 Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案,以JSON数据驱动页面,几句代码即可快速开发属于你的页面。
+```
+
+``` bash
 已实现页面（整体布局界面，用户管理，角色管理，字典管理，权限菜单，接口测试，系统日志，待办事项）
 开发中的页面（代码生成）
-演示地址 http://demo.ffast.cn/  备用地址http://39.107.104.190/ffast
 ```
+
+* 演示地址1  http://demo.ffast.cn/  
+* 演示地址2  http://39.107.104.190/ffast/
+* 演示地址3  http://118.126.66.11/ffast/
+
 
 # 后端解决方案Ffast-Java
 >  https://github.com/ZhiYiDai/Ffast-Java 
@@ -30,7 +37,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 ## 一个简单的增删改表格页面
 ``` bash
 <template>
-  <CrudView :tableOptions="tableOptions" :treeOptions="treeOptions"></CrudView>
+  <CrudView :tableOptions="tableOptions" ></CrudView>
 </template>
 <script>
   /**
@@ -62,10 +69,6 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
       [
         {name: 'identity', type: 'text', span: 12, label: '标识符'},
         {name: 'icon', type: 'text', span: 12, label: '图标'}
-
-      ],
-      [
-        {name: 'weight', type: 'text', span: 12, label: '权重'}
       ],
       [
         {
@@ -102,23 +105,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
       ]
     ]
   }
-  /**
-   * 树参数
-   */
-  const treeOptions = {
-    title: '权限菜单',
-    // 左边树数据地址
-    dataUrl: '/sys/res/list',
-    // 左边树增加数据地址
-    createUrl: '/sys/res/create',
-    // 左边树删除数据地址
-    deleteUrl: '/sys/res/delete',
-    // 左边树更新数据地址
-    updateUrl: '/sys/res/update',
-    // 是否显示工具栏
-    showToolbar: true,
-    editOptions: tableEditOptions
-  }
+ 
   /**
    * 表格参数
    */
@@ -148,7 +135,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
         key: 'resType',
         width: 80,
         title: '类型',
-        //类型枚举 （自动将值（id）转换为对应标签value）
+        // 类型枚举 （自动将值（id）转换为对应标签value）
         enum: [{value: '菜单', id: 1, el: 'strong'}, {value: '权限', id: 2}]
       },
       {key: 'identity', title: '标识符', width: 200},
@@ -180,8 +167,6 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
       [
         {name: 'name', label: '资源名', span: 4, type: 'text'},
         {name: 'identity', label: '标识符', span: 4, type: 'text'},
-        {name: 'url', label: 'Url', span: 4, type: 'text'},
-        {name: 'status', label: '状态', span: 3, type: 'text'},
         {
           name: 'resType',
           type: 'select',
@@ -194,12 +179,10 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
   }
 
   import CrudView from 'components/views/CrudView'
-
   export default {
     data() {
       return {
-        tableOptions,
-        treeOptions
+        tableOptions
       }
     },
     computed: {},
@@ -211,37 +194,24 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 </script>
 ```
 
-
 # 灵活丰富的动态表单组件(FormDynamic)
 
 ## 支持十多种表单组件：
-> 1.input text(单行输入框)
+* input text(单行输入框)
+* input textarea(多行输入框)
+* select(下拉选择框)
+* radio(单选框)
+* checkbox(多选框)
+* treeSelect(选择树)
+* input number(数字输入框)
+* date(日期选择)
+* datetime(日期时间选择)
+* datetimerange(日期时间段选择)
+* ImgUpload(图片上传表单组件)
+* editor(基于vue-quill-editor富文本)
+* PopupSelect(弹出式选择)
+* Switch(开关选择)
 
-> 2.input textarea(多行输入框)
-
-> 3.select(下拉选择框)
-
-> 4.radio(单选框)
-
-> 5.checkbox(多选框)
-
-> 6.treeSelect(选择树)
-
-> 7.input number(数字输入框)
-
-> 8.date(日期选择)
-
-> 9.datetime(日期时间选择)
-
-> 10 datetimerange(日期时间段选择)
-
-> 11.ImgUpload(图片上传表单组件)
-
-> 12.editor(基于vue-quill-editor富文本)
-
-> 13.PopupSelect(弹出式选择)
-
-> 14.Switch(开关选择)
 
 ## 代码样例
 ``` bash
@@ -527,6 +497,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 </script>
 ```
 
+## 排版规则
 ``` bash
 [
   [{}...],//第一行
@@ -546,29 +517,19 @@ rules: {
 ```
 
 # 您还可以使用基于动态表单组件开发的其他组件
-> 1.弹出式编辑表单（PopupEdit）
-> 2.跳转式编辑表单 (edit.vue)
+* 弹出式编辑表单（PopupEdit）
+* 跳转式编辑表单 (edit.vue)
 
 # 还有什么？
-> CrudTreeView（树编辑布局）
-
-> PhotoViewer（图片预览组件）
-
-> DataTree（数据树）
-
-> DataSelect（数据下拉框,支持直接填入字典标识）
-
-> DataTable（数据表格）
-
-> CrudTree(增删改查树)
-
-> CrudTable(增删表格)
-
-> PermsValid(权限验证)
-
-
+* CrudTreeView（树编辑布局）
+* PhotoViewer（图片预览组件）
+* DataTree（数据树）
+* DataSelect（数据下拉框,支持直接填入字典标识）
+* DataTable（数据表格）
+* CrudTree(增删改查树)
+* CrudTable(增删表格)
+* PermsValid(权限验证)
 ...
-
 # 引用关系
 ``` bash
 CrudView -> CrudTable -> DataTable  -> IView Table
@@ -579,4 +540,3 @@ CrudView -> CrudTable -> DataTable  -> IView Table
                       -> PopupEdit  -> FormDynamic
                       -> Edit       -> FormDynamic
 ```
-
