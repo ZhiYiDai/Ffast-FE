@@ -21,7 +21,7 @@ const FormDynamicPage = resolve => require(['pages/example/FormDynamicPage'], re
 const CrudTreeViewPage = resolve => require(['pages/example/CrudTreeViewPage'], resolve);
 const CrudTablePage = resolve => require(['pages/example/CrudTablePage'], resolve);
 const CrudTreePage = resolve => require(['pages/example/CrudTreePage'], resolve);
-// const PermsValidPage = resolve => require(['pages/example/PermsValidPage'], resolve)
+const PermsValidPage = resolve => require(['pages/example/PermsValidPage'], resolve)
 const DataSelectPage = resolve => require(['pages/example/DataSelectPage'], resolve);
 
 const routes = [
@@ -56,7 +56,7 @@ const routes = [
       {path: '/example/crudTreeView', component: CrudTreeViewPage, name: 'CrudTreeViewPage'},
       {path: '/example/crudTable', component: CrudTablePage, name: 'CrudTablePage'},
       {path: '/example/crudTree', component: CrudTreePage, name: 'CrudTreePage'},
-      // {path: '/example/permsValid', component: PermsValidPage, name: 'PermsValidPage'},
+      {path: '/example/permsValid', component: PermsValidPage, name: 'PermsValidPage'},
       {path: '/example/dataSelect', component: DataSelectPage, name: 'DataSelectPage'}
     ]
   },
