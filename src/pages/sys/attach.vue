@@ -34,7 +34,7 @@
         width: 140,
         render (h, params) {
           const row = params.row;
-          if (row.size != null && row.size > 0){
+          if (row.size != null && row.size > 0) {
             return h('span', Math.floor(row.size / 1024) + 'KB');
           }
         }
@@ -62,11 +62,12 @@
     ]
   };
   import {CrudView} from 'components/';
+
   export default {
     data () {
       return {
-        tableOptions,
-      }
+        tableOptions
+      };
     },
     computed: {},
     methods: {
@@ -82,7 +83,8 @@
         });
       }
     },
-    mounted () {},
+    mounted () {
+    },
     components: {CrudView}
   };
 </script>

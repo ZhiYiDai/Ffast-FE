@@ -55,39 +55,39 @@
         treeView: {}
       }
     },
-    data() {
+    data () {
       return {
         deferred: false
-      }
+      };
     },
     computed: {
-      isSingle() {
+      isSingle () {
         return !(this.tableOptions.selection !== null && this.tableOptions.selection.length === 1);
       },
-      isMultiple() {
+      isMultiple () {
         return !(this.tableOptions.selection != null && this.tableOptions.selection.length > 0);
       }
     },
     methods: {
-      queryData() {
+      queryData () {
         this.$refs['table'].queryData();
       },
-      getData() {
+      getData () {
         return this.$refs['table'].tableData;
       },
-      clear() {
+      clear () {
         this.$set(this.$refs['table'], 'tableData', []);
       },
-      refreshTable(type) {
+      refreshTable (type) {
         this.tableOptions.selection = [];
         this.$refs.table.queryData();
       },
-      opened(from, data) {
+      opened (from, data) {
         if (this.tableOptions.editOptions.opened) {
           this.tableOptions.editOptions.opened(from, data);
         }
       },
-      search() {
+      search () {
         this.$refs.searchFrom.submit((data) => {
           for (let i in data) {
             let val = data[i] === '' ? null : data[i];
@@ -95,7 +95,7 @@
           }
         });
       },
-      getSelection() {
+      getSelection () {
         if (this.tableOptions.selection.length <= 0) {
           this.$Message.error('未选择操作项！');
           return null;
@@ -103,28 +103,28 @@
           return this.tableOptions.selection;
         }
       },
-      editSuccess(res) {
+      editSuccess (res) {
         this.refreshTable();
       },
       /**
        * 表格复选框选中事件
        */
-      selectionChange(selection) {
+      selectionChange (selection) {
         this.tableOptions.selection = selection;
         this.$emit('on-selection-change', selection);
       },
       /**
        * 双击表格行
        */
-      rowDblclick(data) {
+      rowDblclick (data) {
 
       },
       /**
        * 单击表格行
        */
-      rowClick(data) {
+      rowClick (data) {
       },
-      insertOrUpdateData(p, loading) {
+      insertOrUpdateData (p, loading) {
         let data = JSON.parse(JSON.stringify(p));
         let list = this.$refs['table'].tableData;
         // 本地结果集
@@ -150,14 +150,14 @@
       /**
        * 删除表格数据
        */
-      delData(index) {
+      delData (index) {
         this.$refs['table'].clearCurrentRow();
         this.$delete(this.$refs['table'].tableData, index);
       },
       /**
        * 表格字段绑定数据
        */
-      columnRenderData() {
+      columnRenderData () {
         if (this.tableOptions.columns != null) {
           for (let i = 0; i < this.tableOptions.columns.length; i++) {
             let col = this.tableOptions.columns[i];
@@ -176,9 +176,8 @@
                   return h('span', row[col.key]);
                 }
               };
-            }
-            // 数据枚举
-            else if (col.enum) {
+            } else if (col.enum) {
+              // 数据枚举
               col.render = (h, params) => {
                 const row = params.row;
                 for (let i = 0; i < col.enum.length; i++) {
@@ -225,16 +224,16 @@
         }
       }
     },
-    mounted() {
+    mounted () {
     },
-    created() {
+    created () {
       this.columnRenderData();
       setTimeout(() => {
         this.deferred = true;
-      }, 100)
+      }, 100);
     },
     components: {
-       DataTable, FormDynamic
+      DataTable, FormDynamic
     }
   };
 </script>

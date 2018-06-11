@@ -269,7 +269,7 @@
       colHeight: {},
       paddingRight: {}
     },
-    data() {
+    data () {
       return {
         keys: null,
         fromData: {},
@@ -277,23 +277,23 @@
       };
     },
     computed: {
-      colStyle() {
+      colStyle () {
         return {
           height: this.colHeight + 'px',
           paddingRight: this.paddingRight + 'px'
-        }
+        };
       }
     },
-    created() {
+    created () {
       this.initForm(this.data);
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      getInputType(item) {
+      getInputType (item) {
         return item.textarea == null ? item.password === true ? 'password' : 'text' : 'textarea';
       },
-      initForm(data) {
+      initForm (data) {
         for (let i in data) {
           for (let j in data[i]) {
             let obj = data[i][j];
@@ -312,7 +312,7 @@
         }
         this.reset();
       },
-      getPlaceholder(item) {
+      getPlaceholder (item) {
         if (this.placeholderLabel) {
           return item.label;
         }
@@ -334,7 +334,7 @@
         }
         return result;
       },
-      checkAll(data, name) {
+      checkAll (data, name) {
         let checkArr = [];
         for (let i = 0; i < data.length; i++) {
           checkArr.push(data[i].value);
@@ -342,7 +342,7 @@
         this.$set(this.fromData, name, checkArr);
         this.$set(this.mData[name], 'checkAll', true);
       },
-      handleCheckAll(item) {
+      handleCheckAll (item) {
         let checkAll = this.mData[item.name].checkAll;
         if (checkAll) {
           this.$set(this.fromData, item.name, []);
@@ -353,7 +353,7 @@
         }
         item.onChange(item, this.mData, this.fromData);
       },
-      checkGroupChange(event, item) {
+      checkGroupChange (event, item) {
         let selected = event.length;
         let orign = this.mData[item.name].data.length;
         if (selected === orign) {
@@ -369,7 +369,7 @@
       /**
        * 重置
        */
-      reset() {
+      reset () {
         this.keys = [];
         // 设置初始默认值
         for (var name in this.mData) {
@@ -397,7 +397,7 @@
        * @param success
        * @param error
        */
-      submit(success, error) {
+      submit (success, error) {
         this.$refs.fromData.validate((valid) => {
           let data = this.fromData;
           if (valid) {
@@ -437,16 +437,16 @@
               error(data);
             }
           }
-        })
+        });
       },
-      getData() {
+      getData () {
         return this.fromData;
       },
       /**
        * 设置表单数据
        * @param fromData
        */
-      setFormData(fromData) {
+      setFormData (fromData) {
         this.reset();
         // 设置表单传进来的值
         for (let name in fromData) {
@@ -471,7 +471,7 @@
       }
     },
     watch: {
-      data(newVal, oldVal) {
+      data (newVal, oldVal) {
         this.initForm(newVal);
       }
     },

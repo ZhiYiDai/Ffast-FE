@@ -63,7 +63,7 @@
 
 <script>
   import {FormDynamic, PopupEdit, DataTable, DataSelect, LocalTable} from 'components';
-  import utils from 'utils/common'
+  import utils from 'utils/common';
 
   let self = null;
 
@@ -84,7 +84,7 @@
       id: 3,
       name: '表格&树增删改页面'
     }
-  }
+  };
   const getPageTypeListData = () => {
     let result = [];
     for (let obj in Object.assign(PageTypeList)) {
@@ -92,7 +92,7 @@
     }
     return result;
 
-  }
+  };
 
   const generatorOtioons = [
     [
@@ -105,7 +105,7 @@
         dataUrl: '/generator/table/list',
         textField: 'tableName',
         valField: 'tableName',
-        onChange(item) {
+        onChange (item) {
           console.log(item);
           self.$refs['dynamicSearch'].setFormData({
             title: item.tableComment
@@ -128,7 +128,7 @@
         span: 12,
         label: '页面模板',
         data: getPageTypeListData(),
-        onChange(value) {
+        onChange (value) {
           self.pageType = value;
         }
       }
@@ -177,7 +177,6 @@
     ]
   ];
 
-
   const dynamic3 = [
     [
       {
@@ -220,7 +219,7 @@
           let editorBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 self.$refs.detailPopupEdit.open({
                   title: '编辑选项设备',
                   postUrl: null
@@ -231,7 +230,7 @@
           let delBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 console.log(params);
                 self.$refs['table'].delData(params.index);
               }
@@ -242,7 +241,6 @@
       }
     ]
   };
-
 
   /**
    * 表格参数
@@ -268,7 +266,7 @@
           let editorBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 self.$refs.detailPopupEdit.open({
                   title: '编辑选项设备',
                   postUrl: null
@@ -279,7 +277,7 @@
           let delBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 console.log(params);
                 self.$refs['tableEdit'].delData(params.index);
               }
@@ -290,7 +288,6 @@
       }
     ]
   };
-
 
   /**
    * 表格参数
@@ -316,7 +313,7 @@
           let editorBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 self.$refs.detailPopupEdit.open({
                   title: '编辑选项设备',
                   postUrl: null
@@ -327,7 +324,7 @@
           let delBtn = h('i-button', {
             props: {size: 'small'},
             on: {
-              click() {
+              click () {
                 console.log(params);
                 self.$refs['tableSearch'].delData(params.index);
               }
@@ -340,7 +337,7 @@
   };
 
   export default {
-    data() {
+    data () {
       return {
         dbTable: null,
         PageTypeList,
@@ -353,17 +350,17 @@
         dynamic1,
         dynamic2,
         dynamic3
-      }
+      };
     },
     computed: {},
     methods: {},
-    mounted() {
+    mounted () {
       self = this;
     },
     components: {
       DataSelect, LocalTable, FormDynamic
     }
-  }
+  };
 </script>
 
 <style scoped>

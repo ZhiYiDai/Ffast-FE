@@ -15,7 +15,6 @@
   }
 
 
-
 </style>
 <style>
   .ctv-right-title {
@@ -84,8 +83,6 @@
             </PermsValid>
           </div>
         </div>
-
-
 
 
         <div v-show='!treeOptions.createMode'>
@@ -199,7 +196,7 @@
         this.$set(this.treeOptions, 'createMode', true);
         this.$nextTick(() => {
           this.$refs.dataFrom.setFormData(param);
-        })
+        });
       },
       /**
        * 添加树数据
@@ -231,16 +228,16 @@
             this.$http.apiPost(this.treeOptions.updateUrl, param).then((res) => {
               this.loading = false;
               if (!res.success) {
-                this.$http.handleError(res)
+                this.$http.handleError(res);
               } else {
                 this.treeOptions.selectId = this.treeOptions.selected.id;
                 this.refreshTree();
                 this.$Message.success('修改成功');
               }
-            })
+            });
           }, (res) => {
             this.loading = false;
-          })
+          });
         }
       },
       /**
@@ -259,7 +256,7 @@
               this.$Message.success('删除成功');
               this.refreshTree();
             }
-          })
+          });
         }
       },
       /**
@@ -293,9 +290,10 @@
         }
       }
     },
-    mounted () {},
+    mounted () {
+    },
     components: {
       PermsValid, DataTree, FormDynamic, PopupEdit, DataSelect
     }
-  }
+  };
 </script>

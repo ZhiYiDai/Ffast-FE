@@ -57,8 +57,8 @@
 
 </template>
 <script>
-  import {PopupEdit, PermsValid , DataTree} from 'components/';
- // import  DataTree from 'components/tree/DataTree';
+  import {PopupEdit, PermsValid, DataTree} from 'components/';
+  // import  DataTree from 'components/tree/DataTree';
 
   export default {
     props: {
@@ -66,32 +66,32 @@
         treeView: {}
       }
     },
-    data() {
-      return {}
+    data () {
+      return {};
     },
     computed: {
-      createPermsTree() {
+      createPermsTree () {
         return this.treeOptions.permsPrefix == null ? null : this.treeOptions.permsPrefix + ':create';
       },
-      updatePermsTree() {
+      updatePermsTree () {
         return this.treeOptions.permsPrefix == null ? null : this.treeOptions.permsPrefix + ':update';
       },
-      deletePermsTree() {
+      deletePermsTree () {
         return this.treeOptions.permsPrefix == null ? null : this.treeOptions.permsPrefix + ':delete';
       },
-      categoryField() {
+      categoryField () {
         if (this.treeOptions == null || this.treeOptions.categoryField == null) {
           return 'parentId';
         } else {
           return this.treeOptions.categoryField;
         }
       },
-      isPopupEdit() {
+      isPopupEdit () {
         return this.treeOptions.editOptions && !this.treeOptions.editOptions.editPage;
       }
     },
     methods: {
-      refreshTree(type) {
+      refreshTree (type) {
         this.treeOptions.selected = null;
         this.$refs.tree.queryData();
         let table = this.treeOptions.tableView;
@@ -100,22 +100,22 @@
           table.$refs.table.queryData();
         }
       },
-      opened(from, data) {
+      opened (from, data) {
         if (this.treeOptions.editOptions.opened) {
           this.treeOptions.editOptions.opened(from, data);
         }
       },
-      tableSpan(span) {
+      tableSpan (span) {
         if (this.treeOptions == null) {
           return 24;
         } else {
           return span;
         }
       },
-      search() {
+      search () {
 
       },
-      getTreeSelected(showMsg) {
+      getTreeSelected (showMsg) {
         if (this.treeOptions.selected == null) {
           if (showMsg == null || showMsg) {
             this.$Message.error('未选择操作项！');
@@ -125,25 +125,25 @@
           return this.treeOptions.selected;
         }
       },
-      onTreeChange(selected) {
+      onTreeChange (selected) {
         this.$set(this.treeOptions, 'selected', selected);
         this.$emit('on-select', selected);
       },
-      editTreeSuccess(res, data) {
+      editTreeSuccess (res, data) {
         this.treeOptions.selectId = data.id;
         this.refreshTree();
       },
-      showEdit(postUrl, title, data) {
+      showEdit (postUrl, title, data) {
         let action = {
           title: title,
           postUrl: postUrl
-        }
+        };
         if (this.treeOptions.editOptions.editPage === true) {
-          this.treeOptions.editOptions.editSuccess = this.editSuccess
+          this.treeOptions.editOptions.editSuccess = this.editSuccess;
           this.$router.push({
             path: this.$router.currentRoute.path + '/edit',
             query: {options: this.treeOptions.editOptions, action: action, data: data}
-          })
+          });
         } else {
           this.$refs.treePopupEdit.open(action, data);
         }
@@ -151,7 +151,7 @@
       /**
        * 添加树数据
        */
-      treeAddData() {
+      treeAddData () {
         let selected = this.getTreeSelected(false);
         let data = {};
         if (selected != null) {
@@ -164,16 +164,16 @@
       /**
        * 编辑树数据
        */
-      treeEditData() {
+      treeEditData () {
         let selected = this.getTreeSelected();
         if (selected != null) {
-          this.showEdit(this.treeOptions.updateUrl, '编辑' + this.treeOptions.title, selected)
+          this.showEdit(this.treeOptions.updateUrl, '编辑' + this.treeOptions.title, selected);
         }
       },
       /**
        * 删除树数据
        */
-      treeDelData() {
+      treeDelData () {
         let selected = this.getTreeSelected();
         if (selected != null) {
           this.treeOptions.selectId = selected.parentId;
@@ -192,7 +192,7 @@
        * 侧边树更新完毕
        * @param data
        */
-      onTreeDataLoaded(data) {
+      onTreeDataLoaded (data) {
         if (this.treeOptions.editOptions != null) {
           this.$nextTick(() => {
             this.$refs['tree'].select(this.treeOptions.selectId);
@@ -201,10 +201,10 @@
         this.$emit('on-data-loaded', data);
       }
     },
-    mounted() {
+    mounted () {
 
     },
-    created() {
+    created () {
 
     },
     components: {

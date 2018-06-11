@@ -6,17 +6,16 @@
 
 </template>
 <script>
-
   import {} from 'components/';
+
   export default {
     data () {
-      return {
-
-      }
+      return {};
     },
     computed: {},
     methods: {},
-    mounted () {},
+    mounted () {
+    },
     components: {}
-  }
+  };
 </script>

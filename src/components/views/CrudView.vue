@@ -80,19 +80,19 @@
         default: true
       }
     },
-    data() {
+    data () {
       return {
         treeCopyData: {}
-      }
+      };
     },
     computed: {
-      isSingle() {
+      isSingle () {
         return !(this.tableOptions.selection !== null && this.tableOptions.selection.length === 1);
       },
-      isMultiple() {
+      isMultiple () {
         return !(this.tableOptions.selection != null && this.tableOptions.selection.length > 0);
       },
-      categoryField() {
+      categoryField () {
         if (this.treeOptions == null || this.treeOptions.categoryField == null) {
           return 'parentId';
         } else {
@@ -101,19 +101,19 @@
       }
     },
     methods: {
-      opened(from, data) {
+      opened (from, data) {
         if (this.tableOptions.editOptions.opened) {
           this.tableOptions.editOptions.opened(from, data);
         }
       },
-      rightSpan(span) {
+      rightSpan (span) {
         if (this.treeOptions == null) {
           return 24;
         } else {
           return span;
         }
       },
-      getTreeSelected(showMsg) {
+      getTreeSelected (showMsg) {
         if (this.treeOptions.selected == null) {
           if (showMsg == null || showMsg) {
             this.$Message.error('未选择操作项！');
@@ -123,7 +123,7 @@
           return this.treeOptions.selected;
         }
       },
-      getSelection() {
+      getSelection () {
         if (this.tableOptions.selection.length <= 0) {
           this.$Message.error('未选择操作项！');
           return null;
@@ -131,10 +131,10 @@
           return this.tableOptions.selection;
         }
       },
-      onTableChange(selection) {
+      onTableChange (selection) {
         this.$emit('on-selection-change', selection);
       },
-      onTreeChange(selected) {
+      onTreeChange (selected) {
         let val = null;
         if (selected != null) {
           val = selected.id;
@@ -146,7 +146,7 @@
        * 侧边树更新完毕
        * @param data
        */
-      onTreeDataLoaded(data) {
+      onTreeDataLoaded (data) {
         if (this.tableOptions != null && this.tableOptions.editOptions != null) {
           this.bindTreeData(data, this.tableOptions.editOptions.dynamic);
         }
@@ -158,7 +158,7 @@
        * 绑定侧边树的数据
        * @param data
        */
-      bindTreeData(data, dynamic) {
+      bindTreeData (data, dynamic) {
         for (let i in dynamic) {
           for (let j in dynamic[i]) {
             if (dynamic[i][j].dataFromTree) {
@@ -173,13 +173,13 @@
         }
       }
     },
-    mounted() {
+    mounted () {
       this.tableOptions.treeView = this.$refs['crudTree'];
       if (this.treeOptions) {
         this.treeOptions.tableView = this.$refs['crudTable'];
       }
     },
-    created() {
+    created () {
     },
     components: {
       PermsValid, DataTable, DataTree, FormDynamic, PopupEdit, DataSelect, CrudTable, CrudTree

@@ -30,7 +30,7 @@
   }
 
   .popup-select-modal .ivu-modal {
-    top:0;
+    top: 0;
   }
 
   .right-col {
@@ -82,7 +82,7 @@
         currentView: null,
         componentVisible: false,
         callBack: null
-      }
+      };
     },
     computed: {
       mTitle () {
@@ -138,5 +138,5 @@
         }
       }
     }
-  }
+  };
 </script>

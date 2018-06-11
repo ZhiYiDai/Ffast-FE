@@ -22,7 +22,7 @@
     data () {
       return {
         isValid: false
-      }
+      };
     }
-  }
+  };
 </script>

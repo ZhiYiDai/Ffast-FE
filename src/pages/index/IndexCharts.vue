@@ -69,8 +69,8 @@
     let label = [];
     let val = [];
     let sum = 0;
-    console.log(111111)
-    console.log(data)
+    console.log(111111);
+    console.log(data);
     for (let key in data.count) {
       label.push(key);
       val.push(data.count[key][0]);
@@ -114,15 +114,14 @@
       ]
     };
     return option;
-  }
+  };
 
-
-  import echarts from 'echarts'
+  import echarts from 'echarts';
   import {NumberUd} from 'components/';
 
   export default {
     props: {},
-    data() {
+    data () {
       return {
         countData: {
           data1: {count: 0},
@@ -130,15 +129,15 @@
           data3: {count: 0},
           data4: {count: 0}
         }
-      }
+      };
     },
-    created() {
+    created () {
     },
-    mounted() {
+    mounted () {
       this.queryData();
     },
     methods: {
-      queryData(data) {
+      queryData (data) {
 
         let countData1 = {
           count: {
@@ -155,7 +154,7 @@
             '2018年11月': [380457],
             '2018年12月': [280457]
           }
-        }
+        };
 
         let countData2 = {
           count: {
@@ -169,7 +168,7 @@
             '6月8号': [5510],
             '6月9号': [6615]
           }
-        }
+        };
 
         let countData3 = {
           count: {
@@ -180,7 +179,7 @@
             '6月8号': [600],
             '6月9号': [345]
           }
-        }
+        };
 
         let countData4 = {
           count: {
@@ -197,11 +196,10 @@
             '11时': [100],
             '12时': [122]
           }
-        }
-
+        };
 
         let chart1 = echarts.init(document.querySelector('#chart1'));
-        let option1 = getCountOption(countData1)
+        let option1 = getCountOption(countData1);
         this.$set(this.countData.data1, 'count', option1.sum);
         chart1.setOption(option1);
 
@@ -210,20 +208,18 @@
         this.$set(this.countData.data2, 'count', option2.sum);
         chart2.setOption(option2);
 
-
         let chart3 = echarts.init(document.querySelector('#chart3'));
-        let option3 = getCountOption(countData3)
+        let option3 = getCountOption(countData3);
         this.$set(this.countData.data3, 'count', option3.sum);
         chart3.setOption(option3);
 
         let chart4 = echarts.init(document.querySelector('#chart4'));
-        let option4 = getCountOption(countData4)
+        let option4 = getCountOption(countData4);
         this.$set(this.countData.data4, 'count', option4.sum);
         chart4.setOption(option4);
-
 
       }
     },
     components: {NumberUd}
-  }
+  };
 </script>

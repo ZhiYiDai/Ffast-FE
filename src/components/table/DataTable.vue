@@ -36,13 +36,11 @@
   /*}*/
 
   /*td {*/
-    /*-webkit-user-select: none;*/
-    /*-moz-user-select: none;*/
-    /*-ms-user-select: none;*/
-    /*user-select: none;*/
+  /*-webkit-user-select: none;*/
+  /*-moz-user-select: none;*/
+  /*-ms-user-select: none;*/
+  /*user-select: none;*/
   /*}*/
-
-
 
   .table-loading .ivu-table-body, .table-loading .ivu-table-tip {
     opacity: 0.5
@@ -159,7 +157,7 @@
           sortOrder: 'asc'
         },
         tableData: []
-      }
+      };
     },
     computed: {
       isSingle () {
@@ -261,7 +259,7 @@
       this.mColumns = this.columns;
       this.columnRenderData();
       if (this.pageSize != null) {
-        this.pageParam.pageSize = this.pageSize
+        this.pageParam.pageSize = this.pageSize;
       }
       if (!this.lazy) {
         this.queryData();
@@ -285,7 +283,7 @@
       }
     },
     components: {}
-  }
+  };
 </script>
 
 

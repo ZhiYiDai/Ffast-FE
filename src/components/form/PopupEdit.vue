@@ -19,7 +19,7 @@
   }
 
   .popup-edit-modal .ivu-modal {
-    top:0;
+    top: 0;
   }
 
 </style>
@@ -74,7 +74,7 @@
         popupOpened: false,
         submitCallBack: null,
         submitBeforeCallBack: null
-      }
+      };
     },
     created () {
     },
@@ -160,5 +160,5 @@
     components: {
       FormDynamic
     }
-  }
+  };
 </script>

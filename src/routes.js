@@ -1,29 +1,28 @@
-import {Main} from 'pages/layout/'
+import {Main} from 'pages/layout/';
 
-const Err404 = resolve => require(['pages/error/404'], resolve)
-const Login = resolve => require(['pages/login'], resolve)
-const sysIndex = resolve => require(['pages/index/index'], resolve)
+const Err404 = resolve => require(['pages/error/404'], resolve);
+const Login = resolve => require(['pages/login'], resolve);
+const sysIndex = resolve => require(['pages/index/index'], resolve);
 
-const EditPage = resolve => require(['pages/edit'], resolve)
+const EditPage = resolve => require(['pages/edit'], resolve);
 
-const DictPage = resolve => require(['pages/sys/dict'], resolve)
-const UserPage = resolve => require(['pages/sys/user'], resolve)
-const RolePage = resolve => require(['pages/sys/role'], resolve)
-const ResPage = resolve => require(['pages/sys/res'], resolve)
-const SysLogPage = resolve => require(['pages/sys/sysLog'], resolve)
-const RequestPage = resolve => require(['pages/sys/request'], resolve)
-const AttachPage = resolve => require(['pages/sys/attach'], resolve)
-const GeneratorPage = resolve => require(['pages/sys/generator'], resolve)
+const DictPage = resolve => require(['pages/sys/dict'], resolve);
+const UserPage = resolve => require(['pages/sys/user'], resolve);
+const RolePage = resolve => require(['pages/sys/role'], resolve);
+const ResPage = resolve => require(['pages/sys/res'], resolve);
+const SysLogPage = resolve => require(['pages/sys/sysLog'], resolve);
+const RequestPage = resolve => require(['pages/sys/request'], resolve);
+const AttachPage = resolve => require(['pages/sys/attach'], resolve);
+const GeneratorPage = resolve => require(['pages/sys/generator'], resolve);
 
-const BacklogPage = resolve => require(['pages/work/backlog'], resolve)
+const BacklogPage = resolve => require(['pages/work/backlog'], resolve);
 
-
-const FormDynamicPage = resolve => require(['pages/example/FormDynamicPage'], resolve)
-const CrudTreeViewPage = resolve => require(['pages/example/CrudTreeViewPage'], resolve)
-const CrudTablePage = resolve => require(['pages/example/CrudTablePage'], resolve)
-const CrudTreePage = resolve => require(['pages/example/CrudTreePage'], resolve)
-const PermsValidPage = resolve => require(['pages/example/PermsValidPage'], resolve)
-const DataSelectPage = resolve => require(['pages/example/DataSelectPage'], resolve)
+const FormDynamicPage = resolve => require(['pages/example/FormDynamicPage'], resolve);
+const CrudTreeViewPage = resolve => require(['pages/example/CrudTreeViewPage'], resolve);
+const CrudTablePage = resolve => require(['pages/example/CrudTablePage'], resolve);
+const CrudTreePage = resolve => require(['pages/example/CrudTreePage'], resolve);
+// const PermsValidPage = resolve => require(['pages/example/PermsValidPage'], resolve)
+const DataSelectPage = resolve => require(['pages/example/DataSelectPage'], resolve);
 
 const routes = [
   {
@@ -57,7 +56,7 @@ const routes = [
       {path: '/example/crudTreeView', component: CrudTreeViewPage, name: 'CrudTreeViewPage'},
       {path: '/example/crudTable', component: CrudTablePage, name: 'CrudTablePage'},
       {path: '/example/crudTree', component: CrudTreePage, name: 'CrudTreePage'},
-      {path: '/example/permsValid', component: PermsValidPage, name: 'PermsValidPage'},
+      // {path: '/example/permsValid', component: PermsValidPage, name: 'PermsValidPage'},
       {path: '/example/dataSelect', component: DataSelectPage, name: 'DataSelectPage'}
     ]
   },
@@ -67,6 +66,6 @@ const routes = [
     component: Login
   },
   {path: '*', redirect: '/404', hidden: true}
-]
+];
 
-export default routes
+export default routes;

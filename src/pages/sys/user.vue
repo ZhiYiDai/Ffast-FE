@@ -28,7 +28,7 @@
       [
         {name: 'id', hidden: true},
         {name: 'username', type: 'text', span: 12, label: '用户名', rules: {required: true}},
-        {name: 'name', type: 'text', span: 12, label: '姓名', rules: {required: true}},
+        {name: 'name', type: 'text', span: 12, label: '姓名', rules: {required: true}}
       ], [
         {
           name: 'email',
@@ -37,7 +37,7 @@
           label: '邮箱',
           rules: {required: true, type: 'email', message: '请填写正确的电子邮箱!'}
         },
-        {name: 'tel', type: 'text', span: 12, label: '手机号码'},
+        {name: 'tel', type: 'text', span: 12, label: '手机号码'}
       ], [
         {
           name: 'roleId',
@@ -141,6 +141,7 @@
   };
 
   import {CrudView} from 'components/';
+
   export default {
     data () {
       return {

@@ -29,6 +29,7 @@
     right: 1px;
     top: 3px;
   }
+
   .captchaImage:hover {
     cursor: pointer;
   }
@@ -53,7 +54,6 @@
     justify-content: center;
     top: 0;
   }
-
 
   .layout-logo {
     height: 60px;
@@ -106,7 +106,7 @@
             </i-button>
           </FormItem>
           <div style="padding: 0px 8px;">
-            Username:<b>admin</b>  Password:<b>123456</b>
+            Username:<b>admin</b> Password:<b>123456</b>
             <router-link style="float: right;" to="/">忘记密码</router-link>
           </div>
         </i-form>
@@ -117,8 +117,9 @@
   </div>
 </template>
 <script>
-  import config from '@/config'
-  import http from '../utils/HttpUtils'
+  import config from '@/config';
+  import http from '../utils/HttpUtils';
+
   export default {
     data () {
       return {
@@ -143,7 +144,7 @@
             {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
           ]
         }
-      }
+      };
     },
     computed: {},
     methods: {
@@ -153,7 +154,7 @@
             let data = {
               username: this.formLogin.username,
               password: this.formLogin.password,
-              captcha: this.formLogin.captcha,
+              captcha: this.formLogin.captcha
             };
             this.loading = true;
             this.$http.apiPost(config.api.userLogin, data).then((res) => {
@@ -165,24 +166,24 @@
                 console.log(res);
                 this.$Message.success('登录成功');
                 OperatorUtils.setBaseData(res.data);
-                this.$router.push({path: "/"});
+                this.$router.push({path: '/'});
 //                this.$store.dispatch('setUser', res.data.userData);
               }
             });
           } else {
             this.$Message.error('请填写正确再提交!');
           }
-        })
+        });
       },
       changeCaptcha () {
-        this.formLogin.captcha = "";
+        this.formLogin.captcha = '';
         this.captchaUrl = HOST + config.api.captcha + new Date().getTime();
       },
       toUpperCase (val) {
         console.log(val);
       }
     },
-    mounted() {
+    mounted () {
       window.addEventListener('keyup', (e) => {
         if (e.keyCode === 13) {
           this.handleSubmit('formLogin');

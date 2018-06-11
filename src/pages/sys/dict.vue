@@ -88,16 +88,18 @@
     ]
   };
   import {CrudView} from 'components/';
+
   export default {
     data () {
       return {
         tableOptions,
         treeOptions
-      }
+      };
     },
     computed: {},
     methods: {},
-    mounted () {},
+    mounted () {
+    },
     components: {CrudView}
-  }
+  };
 </script>

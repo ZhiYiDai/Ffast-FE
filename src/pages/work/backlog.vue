@@ -39,7 +39,7 @@
   .curbacklog li {
     font-size: 14px;
     line-height: 24px;
-    list-style-type:none;
+    list-style-type: none;
   }
 
 </style>
@@ -170,7 +170,7 @@
           type: 'datetime',
           span: 8,
           label: '开始时间',
-          rules: {required: true, type: 'date'},
+          rules: {required: true, type: 'date'}
         },
         {name: 'finishTime', type: 'datetime', span: 8, label: '截止时间'}
       ], [
@@ -182,12 +182,12 @@
     ]
   };
   import FullCalendar from 'vue-fullcalendar';
-  import DateUtils from 'utils/DateUtils'
+  import DateUtils from 'utils/DateUtils';
   import {PopupEdit, CrudView} from 'components/';
-  import Emitter from '@/utils/mixins/emitter'
+  import Emitter from '@/utils/mixins/emitter';
 
   export default {
-    data() {
+    data () {
       return {
         editOptions,
         backlogList: [],
@@ -195,12 +195,12 @@
         curDay: null,
         mode: 0,
         curDayBackLog: []
-      }
+      };
     },
     mixins: [Emitter],
     computed: {},
     methods: {
-      editSuccess(res, data) {
+      editSuccess (res, data) {
         if (this.curBackLog != null) {
           this.curBackLog.name = data.name;
           this.curBackLog.startTime = data.startTime.format('yyyy-MM-dd hh:mm');
@@ -211,23 +211,23 @@
         this.getData();
         this.dispatch('Home', 'on-query-backlog');
       },
-      getBackLogTime(time) {
+      getBackLogTime (time) {
         if (time.length > 10 && time.indexOf('00:00:00') == -1) {
           return time.substring(11, 16);
         } else {
           return '全天';
         }
       },
-      addClick() {
+      addClick () {
         let data = {
           startTime: this.curDay
         };
         this.$refs.popupEdit.open({title: '添加待办事项', postUrl: '/work/backlog/create'}, data);
       },
-      editClick() {
+      editClick () {
         this.$refs.popupEdit.open({title: '编辑待办事项', postUrl: '/work/backlog/update'}, this.curBackLog);
       },
-      finishClick(item) {
+      finishClick (item) {
         let data = {
           id: item.id,
           status: item.status == 1 ? 0 : 1
@@ -242,15 +242,15 @@
           }
         });
       },
-      curDayBackLogClick(item) {
+      curDayBackLogClick (item) {
         this.curBackLog = item;
         this.mode = 2;
       },
-      eventClick(e) {
+      eventClick (e) {
         this.curBackLog = e;
         this.mode = 2;
       },
-      initDayBackData(e) {
+      initDayBackData (e) {
         if (this.curDay != null) {
           this.curDayBackLog = [];
           for (let i = 0; i < this.backlogList.length; i++) {
@@ -260,12 +260,12 @@
           }
         }
       },
-      dayClick(e) {
+      dayClick (e) {
         this.curDay = e;
         this.mode = 1;
         this.initDayBackData();
       },
-      getData() {
+      getData () {
         this.$http.apiPost('/work/backlog/list', {}).then((res) => {
           if (!res.success) {
             this.$http.handleError(res);
@@ -282,10 +282,10 @@
         });
       }
     },
-    mounted() {
+    mounted () {
       this.getData();
     },
-    activated() {
+    activated () {
       let pBackLog = this.$route.params.backLog;
       if (pBackLog) {
         this.curBackLog = pBackLog;

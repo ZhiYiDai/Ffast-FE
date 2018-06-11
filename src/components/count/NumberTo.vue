@@ -20,8 +20,8 @@
     <Tooltip :content="endVal" placement="top-start" :disabled="simplify===false || unitText.length==0">
       <slot name="leftText"></slot>
       <span :style="countStyle" :class="countClass">
-        <span  v-show="endVal!=null" :id="countId">{{ initCount }}</span>
-        <span  v-show="endVal==null">--</span>
+        <span v-show="endVal!=null" :id="countId">{{ initCount }}</span>
+        <span v-show="endVal==null">--</span>
         <span style="font-size: 14px">{{ unitText }}
         </span>
       </span>
@@ -33,6 +33,7 @@
 
 <script>
   import CountUpC from 'countup';
+
   export default {
     name: 'CountTo',
     data () {

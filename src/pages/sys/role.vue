@@ -104,69 +104,69 @@
         }
       ]
     ]
-  }
+  };
 
   import {CrudView, DataTree} from 'components/';
   import utils from '@/utils/common';
 
   export default {
-    data() {
+    data () {
       return {
         tableOptions,
         treeOptions,
         editVisible: false,
         editLoading: true,
         resIds: []
-      }
+      };
     },
     computed: {
-      isSingle() {
-        return !(this.tableOptions.selection != null && this.tableOptions.selection.length === 1)
+      isSingle () {
+        return !(this.tableOptions.selection != null && this.tableOptions.selection.length === 1);
       }
     },
     methods: {
-      treeLoaded(rows, res) {
+      treeLoaded (rows, res) {
         for (let i = 0; i < rows.length; i++) {
           if ((rows[i].resType === 2 || !utils.isNotChilden(rows, rows[i].id)) && res.data.selected != null && res.data.selected.contains(rows[i].id)) {
             console.log(rows[i]);
-            this.$set(rows[i], 'checked', true)
+            this.$set(rows[i], 'checked', true);
           }
         }
       },
-      roleResEdit() {
-        let selection = this.$refs.crudView.getSelection()
+      roleResEdit () {
+        let selection = this.$refs.crudView.getSelection();
         if (selection != null) {
-          this.$refs.resTree.queryData({roleId: selection[0].id})
-          this.editVisible = true
+          this.$refs.resTree.queryData({roleId: selection[0].id});
+          this.editVisible = true;
         }
       },
-      roleResEditOk() {
-        let selection = this.$refs.crudView.getSelection()
-        let checkedNodes = this.$refs.resTree.getCheckedNodes(true)
-        let ids = []
+      roleResEditOk () {
+        let selection = this.$refs.crudView.getSelection();
+        let checkedNodes = this.$refs.resTree.getCheckedNodes(true);
+        let ids = [];
         for (let i = 0; i < checkedNodes.length; i++) {
-          ids.push(checkedNodes[i].id)
+          ids.push(checkedNodes[i].id);
         }
         let param = {
           ids: ids.toString(),
           roleId: selection[0].id
-        }
+        };
         this.$http.apiPost('/sys/roleRes/saveRes', param).then((res) => {
-          this.editLoading = false
+          this.editLoading = false;
           if (!res.success) {
-            this.$http.handleError(res)
+            this.$http.handleError(res);
             setTimeout(() => {
-              this.editLoading = true
-            }, 100)
+              this.editLoading = true;
+            }, 100);
           } else {
-            this.$Message.success('提交成功')
-            this.editVisible = false
+            this.$Message.success('提交成功');
+            this.editVisible = false;
           }
-        })
+        });
       }
     },
-    mounted() {
+    mounted () {
     },
     components: {CrudView, DataTree}
-  }
+  };
 </script>

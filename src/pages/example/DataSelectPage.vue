@@ -65,26 +65,26 @@
   </div>
 </template>
 <script>
-
   import {DataSelect} from 'components/';
 
   export default {
-    data() {
+    data () {
       return {
         val1: null,
         param1: {},
         param2: {name: '超级'}
-      }
+      };
     },
     computed: {},
     methods: {
-      onSelectChange1(value) {
-        alert(value);
+      onSelectChange1 (value) {
+        console.log(value);
+        this.$Message.success(value.label);
       }
     },
-    mounted() {
+    mounted () {
 
     },
     components: {DataSelect}
-  }
+  };
 </script>

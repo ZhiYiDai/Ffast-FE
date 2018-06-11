@@ -32,20 +32,20 @@
 
   export default {
     props: {},
-    data() {
+    data () {
       return {
         options: {},
         action: {},
         data: {},
         loading: false
-      }
+      };
     },
     computed: {},
     methods: {
-      ok() {
+      ok () {
         this.$refs.dynamicForm.submit((param) => {
           console.log(param);
-          debugger
+          debugger;
           if (this.options.submitBeforeCallBack) {
             if (!this.options.submitBeforeCallBack(param)) {
               return;
@@ -79,14 +79,14 @@
           // 表单验证失败
         });
       },
-      back() {
+      back () {
         this.$router.go(-1);
       }
     },
-    mounted() {
+    mounted () {
 
     },
-    activated() {
+    activated () {
       this.options = this.$route.query.options;
       this.action = this.$route.query.action;
       this.data = this.$route.query.data;
@@ -95,7 +95,7 @@
       console.log(this.data);
       this.$nextTick(() => {
         this.$refs['dynamicForm'].setFormData(this.data);
-      })
+      });
     },
     components: {CrudView, FormDynamic, PermsValid}
   };

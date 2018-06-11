@@ -68,15 +68,16 @@
         loading: false,
         treeData: [],
         mData: []
-      }
+      };
     },
     methods: {
       /**
        * 获取数据
        */
       queryData (param) {
-        if (this.dataUrl == null)
-          return
+        if (this.dataUrl == null) {
+          return;
+        }
         this.loading = true;
         param = Object.assign(param || {}, this.param);
         this.$http.apiPost(this.dataUrl, param).then((res) => {
@@ -97,9 +98,9 @@
       onSelectChange (slected) {
         if (slected.length > 0) {
           this.$set(slected[0], 'expand', true);
-          this.$emit("on-select", slected[0])
+          this.$emit('on-select', slected[0]);
         } else {
-          this.$emit("on-select", null)
+          this.$emit('on-select', null);
         }
       },
       onCheckChange () {
@@ -111,7 +112,7 @@
        * @param data
        */
       containParent (parentId, data) {
-        if (parentId == null){
+        if (parentId == null) {
           return;
         }
         for (let k = 0; k < this.mData.length; k++) {
@@ -151,8 +152,8 @@
         }
         val = val.toString();
         let arr = null;
-        if (val.indexOf(",") > 0) {
-          arr = val.split(",");
+        if (val.indexOf(',') > 0) {
+          arr = val.split(',');
         }
         let result = [];
         for (let i = 0; i < this.mData.length; i++) {
@@ -195,7 +196,7 @@
     },
     created () {
       if (!this.lazy) {
-        this.queryData()
+        this.queryData();
       }
     },
     watch: {
@@ -213,7 +214,7 @@
       }
     },
     components: {}
-  }
+  };
 </script>
 
 

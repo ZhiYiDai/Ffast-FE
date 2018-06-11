@@ -54,7 +54,7 @@
 
 <template>
   <div class="sys-index">
-    <Row >
+    <Row>
       <i-col span="24">
         <IndexCharts></IndexCharts>
       </i-col>
@@ -100,42 +100,42 @@
   </div>
 </template>
 <script>
-  import DateUtils from 'utils/DateUtils'
+  import DateUtils from 'utils/DateUtils';
   import {NumberUd} from 'components/';
-  import IndexCharts from './IndexCharts'
+  import IndexCharts from './IndexCharts';
 
   export default {
-    data() {
+    data () {
       return {
         imgUrl: HOST + '/sys/attach/getImg?id=',
         buildingListSize: 8,
         buildingList: [],
         modelingMulti: false,
         DateUtils
-      }
+      };
     },
     computed: {
-      warningList() {
+      warningList () {
         return this.$store.state.warning;
       },
-      backlogList() {
+      backlogList () {
         return this.$store.state.backlog;
       }
     },
     methods: {
-      backlogItemClick(item) {
+      backlogItemClick (item) {
         this.$router.push({
           path: '/work/backlog',
           name: '待办事项',
           params: {
             backLog: item
           }
-        })
-      },
+        });
+      }
     },
-    mounted() {
+    mounted () {
 
     },
     components: {NumberUd, IndexCharts}
-  }
+  };
 </script>

@@ -98,7 +98,7 @@
 </template>
 <script>
   import {PhotoViewer} from 'components/';
-  import utils from '@/utils/common'
+  import utils from '@/utils/common';
 
   export default {
     props: {
@@ -110,7 +110,7 @@
         default: 2048
       }
     },
-    data() {
+    data () {
       return {
         defaultList: [],
         imgName: '',
@@ -122,19 +122,19 @@
         photoViewerVisible: false,
         curIndex: 0,
         postHeaders: {}
-      }
+      };
     },
     methods: {
-      handleView(name) {
+      handleView (name) {
         this.imgName = name;
         this.visible = true;
       },
-      showPhotoViewer(item, index) {
+      showPhotoViewer (item, index) {
         this.curIndex = index;
         this.photoViewerImg = item;
         this.photoViewerVisible = true;
       },
-      handleRemove(file) {
+      handleRemove (file) {
         // 从 upload 实例删除数据
         const fileList = this.$refs.upload.fileList;
         this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
@@ -142,26 +142,26 @@
         this.imagesValue.splice(this.imagesValue.indexOf(file.url), 1);
         this.$emit('input', this.imagesValue.toString());
       },
-      handleSuccess(res, file) {
+      handleSuccess (res, file) {
         // 因为上传过程为实例，这里模拟添加 url
         this.imagesValue.push(res.data.path);
         file.url = this.imagesValue;
         file.name = '7eb99afb9d5f317c912f08b5212fd69a';
         this.$emit('input', this.imagesValue.toString());
       },
-      handleFormatError(file) {
+      handleFormatError (file) {
         this.$Notice.warning({
           title: '文件格式不正确',
           desc: '文件 ' + file.name + ' 格式不正确，请上传 jpg 或 png 格式的图片。'
         });
       },
-      handleMaxSize(file) {
+      handleMaxSize (file) {
         this.$Notice.warning({
           title: '超出文件大小限制',
           desc: '文件 ' + file.name + ' 太大，不能超过 2M。'
         });
       },
-      handleBeforeUpload() {
+      handleBeforeUpload () {
         this.postHeaders.Authorization = OperatorUtils.getToken();
         const check = this.uploadList.length < this.max;
         if (!check) {
@@ -171,7 +171,7 @@
       }
     },
     watch: {
-      value(newVal, oldVal) {
+      value (newVal, oldVal) {
         if (newVal != null) {
           this.imagesValue = [];
           this.uploadList = [];
@@ -189,10 +189,10 @@
         }
       }
     },
-    mounted() {
+    mounted () {
       this.uploadList = this.$refs.upload.fileList;
     },
     components: {PhotoViewer}
-  }
+  };
 </script>
 

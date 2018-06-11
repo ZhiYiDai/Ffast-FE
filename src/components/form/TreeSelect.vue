@@ -60,7 +60,8 @@
 
 <script>
   import clickoutside from 'iview/src/directives/clickoutside';
-  import utils from '@/utils/common'
+  import utils from '@/utils/common';
+
   export default {
     directives: {clickoutside},
     name: 'TreeSelect',
@@ -97,14 +98,14 @@
       param: {},
       dataUrl: {}
     },
-    data() {
+    data () {
       return {
         mData: [],
         tData: [],
         visible: false,
         selected: null,
         selectedText: ''
-      }
+      };
     },
     computed: {
       treeData () {
@@ -117,7 +118,7 @@
        */
       queryData () {
         if (this.dataUrl == null) {
-          return
+          return;
         }
         this.loading = true;
         let param = Object.assign({}, this.param);
@@ -141,7 +142,7 @@
       },
       selectChange (selected) {
         if (this.showCheckbox) {
-          return
+          return;
         }
 
         if (selected == null || selected.length <= 0) {
@@ -150,7 +151,7 @@
           this.$emit('input', null);
         } else {
           if (this.lastStep && selected[0].children != null && selected[0].children.length > 0) {
-            return
+            return;
           }
 
           this.selected = selected[0];
@@ -236,7 +237,7 @@
       }
     },
     components: {}
-  }
+  };
 </script>
 
 

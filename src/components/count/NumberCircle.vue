@@ -38,6 +38,7 @@
 
 <script>
   import NumberTo from './NumberTo';
+
   export default {
     props: {
       title: {},
@@ -66,7 +67,7 @@
           fontSize: this.countSize + 'px',
           color: '#fff'
         }
-      }
+      };
     },
     created () {
 
@@ -86,5 +87,5 @@
     },
     methods: {},
     components: {NumberTo}
-  }
+  };
 </script>

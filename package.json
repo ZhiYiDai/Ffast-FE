@@ -1,9 +1,9 @@
 {
-  "name": "ffast",
+  "name": "Ffast",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "daizhiyi",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

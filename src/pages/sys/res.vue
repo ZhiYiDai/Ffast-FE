@@ -70,7 +70,7 @@
         }
       ]
     ]
-  }
+  };
   /**
    * 树参数
    */
@@ -82,7 +82,7 @@
     updateUrl: '/sys/res/update',
     showToolbar: true,
     editOptions: tableEditOptions
-  }
+  };
   /**
    * 表格参数
    */
@@ -114,12 +114,12 @@
         width: 100,
         title: '菜单图标',
         render: (h, params) => {
-          const row = params.row
+          const row = params.row;
           return h('Icon', {
             props: {
               type: row.icon
             }
-          })
+          });
         }
       },
       {key: 'weight', title: '权重', width: 80},
@@ -145,21 +145,21 @@
         }
       ]
     ]
-  }
+  };
 
-  import {CrudView} from 'components/'
+  import {CrudView} from 'components/';
 
   export default {
-    data() {
+    data () {
       return {
         tableOptions,
         treeOptions
-      }
+      };
     },
     computed: {},
     methods: {},
-    mounted() {
+    mounted () {
     },
     components: {CrudView}
-  }
+  };
 </script>

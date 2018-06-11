@@ -22,11 +22,10 @@
 
 <script>
   import {quillEditor, Quill} from 'vue-quill-editor';
-  import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
+  import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module';
   import 'quill/dist/quill.core.css';
   import 'quill/dist/quill.snow.css';
   import 'quill/dist/quill.bubble.css';
-
 
   Quill.register('modules/ImageExtend', ImageExtend);
 
@@ -50,12 +49,12 @@
         container: container,
         handlers: {
           'image': function () {
-            QuillWatch.emit(this.quill.id)
+            QuillWatch.emit(this.quill.id);
           }
         }
       }
     }
-  }
+  };
 
   export default {
     props: {
@@ -72,24 +71,24 @@
         type: Boolean
       }
     },
-    data() {
+    data () {
       return {
         editorOption,
         content: ''
       };
     },
     computed: {},
-    created() {
+    created () {
       editorOption.placeholder = this.placeholder;
     },
-    mounted() {
+    mounted () {
     },
     methods: {},
     watch: {
-      value(newVal, oldVal) {
+      value (newVal, oldVal) {
         this.content = newVal;
       },
-      content(newVal, oldVal) {
+      content (newVal, oldVal) {
         this.$emit('input', newVal);
       }
     },

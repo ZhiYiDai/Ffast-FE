@@ -104,7 +104,7 @@
         default: 0
       }
     },
-    data() {
+    data () {
       return {
         opacity: 0,
         left: 0,
@@ -120,98 +120,98 @@
         opened: false,
         reallyWidth: 0,
         reallyHeight: 0
-      }
+      };
     },
     methods: {
-      onImgload() {
+      onImgload () {
         this.resize();
       },
-      rightClick() {
+      rightClick () {
         this.nowImg = this.imgs[++this.index];
         this.resize();
       },
-      leftClick() {
+      leftClick () {
         this.nowImg = this.imgs[--this.index];
         this.resize();
       },
-      close() {
+      close () {
         this.mVisible = false;
         this.index = 0;
         this.$emit('input', this.mVisible);
       },
       // 图片拖动
-      startMove(event) {
-        window.addEventListener('mousemove', this.move)
-        window.addEventListener('touchmove', this.move)
-        window.addEventListener('mouseup', this.leave)
-        window.addEventListener('touchend', this.leave)
-        var old = window.getComputedStyle(this.$refs['showImg'])
-        var x = old.left.replace('px', '')
-        var y = old.top.replace('px', '')
-        this.x = event.clientX ? event.clientX : event.touches[0].clientX
-        this.x += ~(x)
-        this.y = event.clientY ? event.clientY : event.touches[0].clientY
-        this.y += ~(y)
+      startMove (event) {
+        window.addEventListener('mousemove', this.move);
+        window.addEventListener('touchmove', this.move);
+        window.addEventListener('mouseup', this.leave);
+        window.addEventListener('touchend', this.leave);
+        var old = window.getComputedStyle(this.$refs['showImg']);
+        var x = old.left.replace('px', '');
+        var y = old.top.replace('px', '');
+        this.x = event.clientX ? event.clientX : event.touches[0].clientX;
+        this.x += ~(x);
+        this.y = event.clientY ? event.clientY : event.touches[0].clientY;
+        this.y += ~(y);
       },
       // 移动函数
-      move(event) {
-        event.preventDefault()
-        var nowX = event.clientX ? event.clientX : event.touches[0].clientX
-        var nowY = event.clientY ? event.clientY : event.touches[0].clientY
-        this.$refs['showImg'].style.left = ~~(nowX) - ~~(this.x) + 'px'
-        this.$refs['showImg'].style.top = nowY - this.y + 'px'
+      move (event) {
+        event.preventDefault();
+        var nowX = event.clientX ? event.clientX : event.touches[0].clientX;
+        var nowY = event.clientY ? event.clientY : event.touches[0].clientY;
+        this.$refs['showImg'].style.left = ~~(nowX) - ~~(this.x) + 'px';
+        this.$refs['showImg'].style.top = nowY - this.y + 'px';
       },
-      leave() {
-        window.removeEventListener('mousemove', this.move)
-        window.removeEventListener('touchmove', this.move)
-        window.removeEventListener('mouseup', this.leave)
-        window.removeEventListener('touchend', this.leave)
+      leave () {
+        window.removeEventListener('mousemove', this.move);
+        window.removeEventListener('touchmove', this.move);
+        window.removeEventListener('mouseup', this.leave);
+        window.removeEventListener('touchend', this.leave);
       },
-      resize() {
+      resize () {
         this.left = 0;
         this.top = 0;
         this.x = 0;
         this.y = 0;
         this.size = 1;
         this.$nextTick(() => {
-          this.$refs['showImg'].style.left = 'auto'
-          this.$refs['showImg'].style.top = 'auto'
-          this.$refs['showImg'].style.height = 'auto'
-          this.$refs['showImg'].style.width = 'auto'
-          this.reallyHeight = window.getComputedStyle(this.$refs['showImg']).height.replace('px', '')
-          this.reallyWidth = window.getComputedStyle(this.$refs['showImg']).width.replace('px', '')
-          this.$refs['showImg'].style.width = this.reallyWidth * this.size + 'px'
-          this.$refs['showImg'].style.height = this.reallyHeight * this.size + 'px'
-        })
+          this.$refs['showImg'].style.left = 'auto';
+          this.$refs['showImg'].style.top = 'auto';
+          this.$refs['showImg'].style.height = 'auto';
+          this.$refs['showImg'].style.width = 'auto';
+          this.reallyHeight = window.getComputedStyle(this.$refs['showImg']).height.replace('px', '');
+          this.reallyWidth = window.getComputedStyle(this.$refs['showImg']).width.replace('px', '');
+          this.$refs['showImg'].style.width = this.reallyWidth * this.size + 'px';
+          this.$refs['showImg'].style.height = this.reallyHeight * this.size + 'px';
+        });
       },
-      changeSize(event) {
-        this.showSize = true
-        var change = event.deltaY
+      changeSize (event) {
+        this.showSize = true;
+        var change = event.deltaY;
         if (change < 0) {
           if (this.size > 0.9 && this.size < 1) {
-            var num = 1 - this.size
-            this.size = 1
+            var num = 1 - this.size;
+            this.size = 1;
           } else {
-            this.size += 0.06
+            this.size += 0.06;
           }
         } else {
           if (this.size > 0.12) {
-            this.size -= 0.06
+            this.size -= 0.06;
           }
         }
         this.$nextTick(() => {
-          this.$refs['showImg'].style.width = this.reallyWidth * this.size + 'px'
-          this.$refs['showImg'].style.height = this.reallyHeight * this.size + 'px'
-        })
-        event.preventDefault()
+          this.$refs['showImg'].style.width = this.reallyWidth * this.size + 'px';
+          this.$refs['showImg'].style.height = this.reallyHeight * this.size + 'px';
+        });
+        event.preventDefault();
       }
     },
-    created() {
+    created () {
     },
-    mounted() {
+    mounted () {
     },
     watch: {
-      value(newVal, oldVal) {
+      value (newVal, oldVal) {
         this.mVisible = newVal;
         if (newVal) {
           if (!this.opened) {
@@ -223,7 +223,7 @@
           window.removeEventListener('mousewheel', this.changeSize);
         }
       },
-      picIds(newVal, oldVal) {
+      picIds (newVal, oldVal) {
         this.nowImg = null;
         let imgs = [];
         if (newVal != null && newVal.length > 0) {
@@ -236,7 +236,7 @@
         this.imgs = imgs;
         this.nowImg = this.imgs[this.index];
       },
-      imgList(newVal, oldVal) {
+      imgList (newVal, oldVal) {
         if (Object.prototype.toString.call(newVal) === '[object Array]') {
           this.imgs = newVal;
           this.nowImg = this.imgs;
@@ -246,20 +246,20 @@
         }
         this.nowImg = this.imgs[this.index];
       },
-      showSize() {
+      showSize () {
         if (this.showSize) {
-          clearInterval(this.setSize)
+          clearInterval(this.setSize);
           this.setSize = setTimeout(() => {
-            this.showSize = false
-          }, 1500)
+            this.showSize = false;
+          }, 1500);
         }
       },
-      curIndex(newVal, oldVal) {
+      curIndex (newVal, oldVal) {
         this.nowImg = null;
         this.index = newVal;
         this.nowImg = this.imgs[this.index];
       }
     },
     components: {}
-  }
+  };
 </script>

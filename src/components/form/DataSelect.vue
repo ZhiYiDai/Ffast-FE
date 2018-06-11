@@ -26,8 +26,9 @@
 </template>
 
 <script>
-  import config from '@/config'
-  import utils from '@/utils/common'
+  import config from '@/config';
+  import utils from '@/utils/common';
+
   export default {
     name: 'DataSelect',
     props: {
@@ -76,17 +77,17 @@
         loading: false,
         mData: [],
         selected: ''
-      }
+      };
     },
     computed: {
       selectData () {
         return (this.data == null ? this.mData : this.data);
       },
       vField () {
-        return this.dict != null ? 'id' : this.valField
+        return this.dict != null ? 'id' : this.valField;
       },
       tField () {
-        return this.dict != null ? 'name' : this.textField
+        return this.dict != null ? 'name' : this.textField;
       }
     },
     methods: {
@@ -103,7 +104,7 @@
           textField = 'name';
           valField = 'id';
         }
-        if (url == null){
+        if (url == null) {
           return;
         }
         this.loading = true;
@@ -118,7 +119,7 @@
           }
         });
       },
-      onSelectChange(select){
+      onSelectChange (select) {
         // 判断数组是否有错误的值
         if (utils.isArray(select)) {
           for (let i = 0; i < select.length; i++) {
@@ -190,5 +191,5 @@
       }
     },
     components: {}
-  }
+  };
 </script>

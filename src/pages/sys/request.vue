@@ -17,18 +17,21 @@
     border-left: 2px #333 solid;
     font-size: 14px;
   }
-  td{
+
+  td {
     height: 30px;
     padding: 0px 5px;
     text-align: center;
   }
-  tr th{
+
+  tr th {
     height: 30px;
     white-space: nowrap;
     overflow: hidden;
     background-color: #f8f8f9;
   }
-  table{
+
+  table {
     border: 1px #f8f8f9 solid;
     margin-bottom: 2px;
   }
@@ -57,20 +60,22 @@
         <Row :gutter="10" style="padding-top: 10px">
           <i-col span="20" style="max-height: 300px;overflow: auto;">
             <Row>
-            <table v-show="paramDynamic && paramDynamic.length>0" style="width: 100%"　>
-              <tr>
-                <th style="width: 120px" class="ivu-table-column-center">参数名</th>
-                <th class="ivu-table-column-center">值</th>
-                <th style="width: 60px" class="ivu-table-column-center">　</th>
-              </tr>
-              <template v-for="(item, index) in paramDynamic" v-if="item.status">
-              <tr>
-                <td><Input type="text" size="small" v-model="item.name" placeholder="参数名"></Input></td>
-                <td><Input type="text" size="small" v-model="item.value" placeholder="值"></Input></td>
-                <td><Button type="ghost" size="small" @click="handleRemove(index)">删除</Button></Input></td>
-              </tr>
-              </template>
-            </table>
+              <table v-show="paramDynamic && paramDynamic.length>0" style="width: 100%" 　>
+                <tr>
+                  <th style="width: 120px" class="ivu-table-column-center">参数名</th>
+                  <th class="ivu-table-column-center">值</th>
+                  <th style="width: 60px" class="ivu-table-column-center">　</th>
+                </tr>
+                <template v-for="(item, index) in paramDynamic" v-if="item.status">
+                  <tr>
+                    <td><Input type="text" size="small" v-model="item.name" placeholder="参数名"></Input></td>
+                    <td><Input type="text" size="small" v-model="item.value" placeholder="值"></Input></td>
+                    <td>
+                      <Button type="ghost" size="small" @click="handleRemove(index)">删除</Button>
+                      </Input></td>
+                  </tr>
+                </template>
+              </table>
             </Row>
             <Row>
               <Button type="dashed" long @click="handleAdd" icon="plus-round">添加参数</Button>
@@ -121,9 +126,10 @@
           {label: 'GET', value: 'GET'}
         ],
         urlList: []
-      }
+      };
     },
-    created () {},
+    created () {
+    },
     mounted () {
       this.$http.apiGet('/restful/list', {}).then((res) => {
         this.apiList = res;
@@ -143,7 +149,7 @@
       handleRemove (index) {
         this.paramDynamic[index].status = 0;
       },
-      onClick (api){
+      onClick (api) {
         this.url = api.url.replace('/api/', '/');
       },
       filterSearch (value) {
@@ -164,16 +170,16 @@
           case 'POST':
             this.$http.apiPost(this.url, param).then((res) => {
               this.result = JSON.stringify(res);
-            })
+            });
             break;
           case 'GET':
             this.$http.apiGet(this.url, param).then((res) => {
               this.result = JSON.stringify(res);
-            })
+            });
             break;
         }
       }
     },
     components: {}
-  }
+  };
 </script>

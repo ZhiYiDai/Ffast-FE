@@ -40,15 +40,17 @@
   };
 
   import {CrudTreeView} from 'components/';
+
   export default {
     data () {
       return {
         treeOptions
-      }
+      };
     },
     computed: {},
     methods: {},
-    mounted () {},
+    mounted () {
+    },
     components: {CrudTreeView}
-  }
+  };
 </script>

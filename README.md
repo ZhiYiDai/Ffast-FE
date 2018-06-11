@@ -16,23 +16,33 @@ npm run build
 
 ```
 
-# 简介
+## 简介
 ``` bash
 Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案,以JSON数据驱动页面,几句代码即可快速开发属于你的页面。
 ```
 
-``` bash
-已实现页面（整体布局界面，用户管理，角色管理，字典管理，权限菜单，接口测试，系统日志，待办事项）
-开发中的页面（代码生成）
-```
+## 演示地址
+* http://demo.ffast.cn/
+* http://39.107.104.190/ffast/
+* http://118.126.66.11/ffast/
 
-* 演示地址1  http://demo.ffast.cn/  
-* 演示地址2  http://39.107.104.190/ffast/
-* 演示地址3  http://118.126.66.11/ffast/
+## 技术栈
+  vue2 + vuex + vue-router + webpack + ES6 + axios + iview
 
+## 后端解决方案Ffast-Java
+>  https://github.com/ZhiYiDai/Ffast-Java
 
-# 后端解决方案Ffast-Java
->  https://github.com/ZhiYiDai/Ffast-Java 
+### 已实现模块
+* 整体布局界面
+* 用户管理
+* 角色管理
+* 字典管理
+* 权限菜单
+* 接口测试
+* 系统日志
+* 待办事项
+### 开发中的模块
+* 代码生成
 
 ## 一个简单的增删改表格页面
 ``` bash
@@ -105,7 +115,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
       ]
     ]
   }
- 
+
   /**
    * 表格参数
    */
@@ -194,9 +204,9 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 </script>
 ```
 
-# 灵活丰富的动态表单组件(FormDynamic)
+## 灵活丰富的动态表单组件(FormDynamic)
 
-## 支持十多种表单组件：
+### 支持十多种表单组件：
 * input text(单行输入框)
 * input textarea(多行输入框)
 * select(下拉选择框)
@@ -516,11 +526,11 @@ rules: {
 具体请看https://github.com/yiminghe/async-validator
 ```
 
-# 您还可以使用基于动态表单组件开发的其他组件
+## 您还可以使用基于动态表单组件开发的其他组件
 * 弹出式编辑表单（PopupEdit）
 * 跳转式编辑表单 (edit.vue)
 
-# 还有什么？
+## 还有什么？
 * CrudTreeView（树编辑布局）
 * PhotoViewer（图片预览组件）
 * DataTree（数据树）
@@ -530,7 +540,7 @@ rules: {
 * CrudTable(增删表格)
 * PermsValid(权限验证)
 ...
-# 引用关系
+## 引用关系
 ``` bash
 CrudView -> CrudTable -> DataTable  -> IView Table
                       -> PopupEdit  -> FormDynamic
