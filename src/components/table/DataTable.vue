@@ -17,33 +17,43 @@
     height: 36px;
   }
 
-  /*.table-panel .ivu-table-wrapper {*/
-  /*border-color: #f4f4f4;*/
-  /*}*/
+  .table-panel .ivu-table-wrapper {
+  border-color: #f4f4f4;
+  }
 
-  /*.table-panel .ivu-table:after {*/
-  /*display: none;*/
-  /*background-color: #f4f4f4;*/
-  /*}*/
+  .table-panel .ivu-table:after {
+  display: none;
+  background-color: #f4f4f4;
+  }
 
-  /*.table-panel .ivu-table:before {*/
-  /*background-color: #e9eaec;*/
-  /*display: none;*/
-  /*}*/
+  .table-panel .ivu-table:before {
+  background-color: #e9eaec;
+  display: none;
+  }
 
-  /*.table-panel .ivu-table:before {*/
-  /*background-color: #f8f8f9;*/
-  /*}*/
+  .table-panel .ivu-table:before {
+  background-color: #f8f8f9;
+  }
 
-  /*td {*/
-  /*-webkit-user-select: none;*/
-  /*-moz-user-select: none;*/
-  /*-ms-user-select: none;*/
-  /*user-select: none;*/
-  /*}*/
+  td {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  }
 
   .table-loading .ivu-table-body, .table-loading .ivu-table-tip {
     opacity: 0.5
+  }
+
+  .table-panel ::-webkit-scrollbar-thumb {
+    background-color: #f8f8f9;
+  }
+
+
+
+  .table-panel .ivu-table-wrapper {
+    border: none;
   }
 
 
@@ -78,7 +88,7 @@
     </div>
     <div>
       <i-table :data="tableData"
-               border
+
                :columns="mColumns"
                ref="table"
                @on-row-click="rowClick"

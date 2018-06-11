@@ -18,27 +18,27 @@
     font-size: 14px;
   }
 
-  td {
+  .param-table td {
     height: 30px;
     padding: 0px 5px;
     text-align: center;
   }
 
-  tr th {
+  .param-table tr th {
     height: 30px;
     white-space: nowrap;
     overflow: hidden;
     background-color: #f8f8f9;
   }
 
-  table {
+  .param-table {
     border: 1px #f8f8f9 solid;
     margin-bottom: 2px;
   }
 
 </style>
 <style>
-  .ivu-table-wrapper {
+  .param-table .ivu-table-wrapper {
     border: none;
   }
 </style>
@@ -60,7 +60,7 @@
         <Row :gutter="10" style="padding-top: 10px">
           <i-col span="20" style="max-height: 300px;overflow: auto;">
             <Row>
-              <table v-show="paramDynamic && paramDynamic.length>0" style="width: 100%" 　>
+              <table v-show="paramDynamic && paramDynamic.length>0" class="param-table" style="width: 100%" 　>
                 <tr>
                   <th style="width: 120px" class="ivu-table-column-center">参数名</th>
                   <th class="ivu-table-column-center">值</th>
