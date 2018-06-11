@@ -73,11 +73,14 @@
     top: 40%;
   }
 
-  .user-name{
+  .user-name {
     font-size: 14px;
     padding-left: 3px;
   }
 
+  .backlog-content{
+    color: #657180;font-size: 13px
+  }
 
 </style>
 <style>
@@ -98,7 +101,7 @@
   <div class="layout-header">
 
     <div style="padding: 6px 15px;float: left;cursor: pointer;" @click="toggleClick">
-      <Icon type="navicon" size="34" ></Icon>
+      <Icon type="navicon" size="34"></Icon>
     </div>
     <div class="layout-header-right">
 
@@ -141,8 +144,7 @@
                       {{item.priority == 0 ? '一般' : item.priority == 1 ? '重要' : ''}}
                       </Tag>
                   </span>
-                    <div>
-                      {{item.content}}
+                    <div class="backlog-content" v-html="item.content">
                     </div>
                   </li>
                 </ul>
@@ -171,7 +173,7 @@
       <Dropdown class="user-panel list-panel">
 
 
-        <Avatar icon="person" size="small" style="background-color: #5c6b77" />
+        <Avatar icon="person" size="small" style="background-color: #5c6b77"/>
         <span class="user-name">{{userData.userName}}</span>
 
 
@@ -191,10 +193,11 @@
 </template>
 
 <script>
-  import DateUtils from 'utils/DateUtils'
-  import config from '@/config'
-  import Emitter from '@/utils/mixins/emitter'
-  import { PopupEdit } from 'components/';
+  import DateUtils from 'utils/DateUtils';
+  import config from '@/config';
+  import Emitter from '@/utils/mixins/emitter';
+  import {PopupEdit} from 'components/';
+
   /**
    * 弹出式表单参数
    */
@@ -223,7 +226,7 @@
                 dot: this.$store.state.warning.length > 0
               }
             }, [h('span', '报 警')])
-          ])
+          ]);
         },
         label2: (h) => {
           return h('div', [
@@ -232,7 +235,7 @@
                 dot: this.$store.state.backlog.length > 0
               }
             }, [h('span', '待 办')])
-          ])
+          ]);
         },
         label3: (h) => {
           return h('div', [
@@ -241,26 +244,29 @@
                 dot: false
               }
             }, [h('span', '消 息')])
-          ])
+          ]);
         },
         userData: OperatorUtils.getUserData(),
         tableRefOptions,
         tabIndex: 0,
         DateUtils
-      }
+      };
     },
     computed: {
       warningList () {
         return this.$store.state.warning;
       },
       backlogList () {
+        if (this.$store.state.backlog != null) {
+          return this.$store.state.backlog.slice(0, 4);
+        }
         return this.$store.state.backlog;
       },
       isNewMsg () {
         if (this.$store.state.backlog.length > 0 || this.$store.state.warning.length > 0) {
-          return true
+          return true;
         } else {
-          return false
+          return false;
         }
       }
     },
@@ -275,7 +281,7 @@
           params: {
             backLog: item
           }
-        })
+        });
       },
       gotoWarning (warning) {
 
@@ -311,7 +317,7 @@
       tableRefOptions,
       PopupEdit
     }
-  }
+  };
 </script>
 
 

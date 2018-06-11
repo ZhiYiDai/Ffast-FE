@@ -1,9 +1,8 @@
 # Ffast-FE
-
 > 基于vue iview后台管理系统前端快速开发解决方案
 
-## Install
 
+## Install
 ``` bash
 # install dependencies
 npm install or yarn
@@ -44,7 +43,7 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 ### 开发中的模块
 * 代码生成
 
-## 一个简单的增删改表格页面
+## 一个增删改查表格页面 ( CrudView )
 ``` bash
 <template>
   <CrudView :tableOptions="tableOptions" ></CrudView>
@@ -176,7 +175,6 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
     searchDynamic: [
       [
         {name: 'name', label: '资源名', span: 4, type: 'text'},
-        {name: 'identity', label: '标识符', span: 4, type: 'text'},
         {
           name: 'resType',
           type: 'select',

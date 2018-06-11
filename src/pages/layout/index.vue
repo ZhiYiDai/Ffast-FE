@@ -69,26 +69,8 @@
       this.$on('on-query-backlog', (data) => {
         this.queryBacklog();
       });
-      this.$on('on-show-warning-detail', (data) => {
-        this.broadcast('Warning', 'on-show-detail', data);
-      });
-
-      // this.queryWarning();
       this.queryBacklog();
-      // setInterval(() => {
-      //   this.queryWarning();
-      //   timerCount++;
-      //   // 每隔一段时间清除掉一些重要以上的已提醒项
-      //   if (timerCount % 2 === 0) {
-      //     this.$store.dispatch('removeRemind', 'warning_lv_5');
-      //   }
-      //   if (timerCount % 3 === 0) {
-      //     this.$store.dispatch('removeRemind', 'warning_lv_4');
-      //   }
-      //   if (timerCount % 5 === 0) {
-      //     this.$store.dispatch('removeRemind', 'warning_lv_3');
-      //   }
-      // }, 10000);
+
     },
     components: {
       Navbar,

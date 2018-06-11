@@ -44,7 +44,7 @@ const mutations = {
   queryBacklogData (state, callback) {
     let params = {
       afterDate: DateUtils.getDateAmount(new Date(), -1).format('yyyy-MM-dd'),
-      pageSize: 4,
+      pageSize: 8,
       page: 1,
       status: 0
     }

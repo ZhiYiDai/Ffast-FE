@@ -60,7 +60,7 @@
         <Button type="ghost" size="small" @click="queryData" icon="loop"></Button>
         <Poptip placement="bottom-end" width="200">
           <Button size="small" type="ghost" icon="funnel"></Button>
-          <div class="api" slot="content">
+          <div slot="content" style="margin: 5px 0">
             <div v-for="col in columns">
               <Checkbox @on-change="columnsChange"
                         :true-value="false"
@@ -225,6 +225,9 @@
           }
         }
         this.mColumns = list;
+        this.$nextTick(() => {
+          this.mColumns = list;
+        });
       },
       /**
        * 表格字段绑定数据

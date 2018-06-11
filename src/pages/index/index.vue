@@ -4,22 +4,9 @@
     width: 100%;
   }
 
-  .building-card {
-    width: 100%;
-  }
-
-  .building-a {
-    float: left;
-    padding: 5px
-  }
-
-  .building-a img {
-    width: 100%;
-    height: 100%
-  }
 
   .backlog li {
-    height: 67px;
+    height: 70px;
     cursor: pointer;
     padding: 5px;
     border-bottom: #F5F7F9 1px solid;
@@ -44,6 +31,12 @@
     padding-top: 120px;
   }
 
+  .backlog-parent{
+    height: 565px
+  }
+  .backlog-content{
+    color: #657180;font-size: 13px
+  }
 </style>
 <style>
   .not-padding .ivu-card-body {
@@ -68,7 +61,7 @@
             更多
             <Icon type="ios-arrow-right"></Icon>
           </router-link>
-          <div style="height: 520px">
+          <div class="backlog-parent">
             <ul v-if="backlogList">
               <li v-for="item in backlogList" class="curday-backlog-li" @click="backlogItemClick(item)">
                 <Tag :color="item.priority==1?'red':'default'">
@@ -79,10 +72,9 @@
                   </span>
                 <span style="float: right">
                   {{DateUtils.getSimpleDate2(item.startTime)}}
-                      <Tag
-                        :color="item.status==1?'blue':'green'">{{item.status == 0 ? '未完成' : item.status == 1 ? '已完成' : ''}}</Tag>
+                      <Tag :color="item.status==1?'blue':'green'">{{item.status == 0 ? '未完成' : item.status == 1 ? '已完成' : ''}}</Tag>
                   </span>
-                <div>{{item.content}}</div>
+                <div class='backlog-content' v-html="item.content"></div>
               </li>
             </ul>
             <div v-if="backlogList.length==0" class="empty">
@@ -108,9 +100,6 @@
     data () {
       return {
         imgUrl: HOST + '/sys/attach/getImg?id=',
-        buildingListSize: 8,
-        buildingList: [],
-        modelingMulti: false,
         DateUtils
       };
     },
