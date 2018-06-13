@@ -115,7 +115,6 @@
             this.$http.handleError(res);
           } else {
             this.mData = utils.constructSelect(res.data.rows, textField, valField);
-            console.log(this.mData);
           }
         });
       },
@@ -128,15 +127,15 @@
             }
           }
         }
-        let selected = (select == null ? null : select.toString());
-        this.$emit('input', selected);
+        //let selected = (select == null ? null : select.toString());
+        this.$emit('input', select);
         // on-change
-        if (selected === null) {
+        if (select === null) {
           this.$emit('on-change', null);
         }
         if (this.data === null) {
           for (let i = 0; i < this.mData.length; i++) {
-            if (this.mData[i][this.vField].toString() === selected) {
+            if (this.mData[i][this.vField] === select) {
               this.$emit('on-change', this.mData[i]);
               break;
             }
@@ -152,16 +151,18 @@
       },
       setSelected (newVal) {
         if (this.multiple) {
-          this.selected = [];
           if (newVal != null) {
-            this.selected = newVal;
-            // 字符分割
-            let strs = newVal.split(',');
-            let arr = [];
-            for (let i = 0; i < strs.length; i++) {
-              arr.push(strs[i].toString());
+            if (utils.isString(newVal)) {
+              // 字符分割
+              let strs = newVal.split(',');
+              let arr = [];
+              for (let i = 0; i < strs.length; i++) {
+                arr.push(parseInt(strs[i]));
+              }
+              this.selected = arr;
             }
-            this.selected = arr;
+          } else {
+            this.selected = [];
           }
         } else {
           this.selected = newVal;
@@ -182,6 +183,7 @@
     watch: {
       value (newVal, oldVal) {
         this.setSelected(newVal);
+        console.log(this.selected, newVal);
       },
       param: {
         handler (curVal, oldVal) {
