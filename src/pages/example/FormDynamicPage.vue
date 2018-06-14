@@ -3,16 +3,24 @@
     <row>
       <i-col span="24">
         <FormDynamic ref="dynamic1" v-model="fromData" :data="dynamic1" :label-width="120">
+          <template slot="append">
+            append
+          </template>
         </FormDynamic>
       </i-col>
     </row>
     <PopupEdit ref="popupEdit"
                :width="1000"
                :dynamic="dynamic1"
-               @on-success="editSuccess"
+               :postCloseModal="true"
+               @on-setfrom-after="()=>{this.$Notice.open({title: 'on-setfrom-after',desc: '设置表单数据前'});}"
+               @on-opened="()=>{this.$Notice.open({title: 'on-opened',desc: '打开窗口后'});}"
+               @on-submit-before="()=>{this.$Notice.open({title: 'on-submit-before',desc: '提交表单前'});}"
+               @on-success="()=>{this.$Notice.open({title: 'on-success',desc: '提交成功'});}"
                :label-width="120">
     </PopupEdit>
-    <PopupSelect ref="popSelect" :content="userPage"></PopupSelect>
+    <PopupSelect ref="popSelect" :content="userPage">
+    </PopupSelect>
   </div>
 </template>
 <script>
@@ -45,8 +53,7 @@
         type: 'text',
         span: 6,
         password: true,
-        label: 'PasswordLabel',
-        rules: {required: true, type: 'string', message: '密码不能为空'}
+        label: 'PasswordLabel'
       },
       {
         name: 'textarea',
@@ -122,6 +129,7 @@
         ],
         onChange: (val, from, data) => {
           self.$Message.success('onChange');
+          self.$set(data, 'editor', '<h2>Ffast-FE radio onChange ' + val + '</h2>');
         }
       },
       {
@@ -141,7 +149,7 @@
         }
       },
       {
-        name: 'deviceTypeId',
+        name: 'treeSelectData',
         type: 'treeSelect',
         span: 8,
         label: 'TreeSelectLabel',
@@ -164,7 +172,7 @@
           'popText',
         textField:
           'popSelectName',
-        onClick (fromData) {
+        onClick(fromData) {
           self.$refs['popSelect'].open((selection) => {
             console.log(selection[0].id);
             self.$set(fromData, 'popSelectId', selection[0].id);
@@ -179,8 +187,20 @@
         // 最多只能上传2张
         max: 2,
         type: 'imgUpload',
-        span: 24,
+        span: 12,
         label: 'ImgUploadLabel'
+      },
+      {
+        name: 'switchData',
+        openText: 'on',
+        closeText: 'off',
+        type: 'switch',
+        span: 12,
+        label: 'SwitchLabel',
+        value: 1,
+        trueValue: 1,
+        falseValue: 0,
+        rules: {required: true, type: 'number'}
       },
       {name: 'editor', type: 'editor', span: 24, label: 'EditorLabel', placeholder: '富文本编辑器'}
     ], [
@@ -191,14 +211,14 @@
         data: [
           {
             label: 'SetData',
-            onClick () {
+            onClick() {
               // 给表单设置数据
-              self.$refs.dynamic1.setFormData({numberData: 10001, textData: 'SetData', editor: '<h1>Fffast-FE</h1>'});
+              self.$refs.dynamic1.setFormData({passwordData: 10001, textData: 'SetData', editor: '<h1>Fffast-FE</h1>'});
             }
           },
           {
             label: 'GetFormData',
-            onClick () {
+            onClick() {
               self.$refs.dynamic1.submit((param) => {
                 console.log(param);
                 alert(JSON.stringify(param));
@@ -210,17 +230,17 @@
           {
             // 弹出窗口编辑表单
             label: 'PopupWindow',
-            onClick () {
+            onClick() {
               self.$refs.popupEdit.open({
                 title: 'PopupEditWindow',
                 // 确认提交url
-                postUrl: null
+                postUrl: ''
               }, self.fromData);
             }
           },
           {
             label: 'GotoEditPage',
-            onClick () {
+            onClick() {
               self.editOptions.editSuccess = self.editSuccess;
               let action = {
                 // 窗口标题
@@ -249,7 +269,7 @@
   };
 
   export default {
-    data () {
+    data() {
       return {
         editOptions,
         dynamic1,
@@ -258,17 +278,12 @@
     },
     computed: {
       // 弹出选择页面
-      userPage () {
+      userPage() {
         return import('pages/sys/user');
       }
     },
-    methods: {
-      // 编辑成功
-      editSuccess (res) {
-        console.log(res);
-      }
-    },
-    mounted () {
+    methods: {},
+    mounted() {
       self = this;
     },
     components: {
