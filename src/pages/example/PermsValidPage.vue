@@ -35,7 +35,7 @@
     <row style="padding-top: 100px">
       <Alert show-icon>
         超级管理员账号 admin 密码123456
-        <br>游客账号 guest 密码123465
+        <br>游客账号 guest 密码123456
         <br>您可以切换账号试试！
       </Alert>
     </row>
