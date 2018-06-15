@@ -46,16 +46,16 @@ Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方�
 
 ### 效果图
 
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page1.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page2.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page3.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page4.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page5.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page6.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page7.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page8.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page9.jpg)
-![image](https://gitee.com/cvb1234/Ffast-FE/tree/master/demo/page10.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page1.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page2.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page3.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page4.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page5.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page6.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page7.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page8.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page9.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page10.jpg)
 ## 一个增删改查表格页面 ( CrudView )
 ``` bash
 <template>
