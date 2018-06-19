@@ -20,9 +20,7 @@
 
 </style>
 <style>
-  .table-panel .ivu-table-body {
-    height: 450px;
-  }
+
 </style>
 
 <template>

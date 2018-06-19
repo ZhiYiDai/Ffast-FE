@@ -26,7 +26,7 @@
     ],
     searchDynamic: [
       [
-        {name: 'content', label: '日志内容', span: 6, type: 'text'},
+        {name: 'content', label: '日志内容', span: 4, type: 'text'},
         {name: 'operation', label: '操作项', span: 4, type: 'text'},
         {name: 'creatorName', label: '操作人', span: 4, type: 'text'},
         {name: 'createTime', label: '时间', span: 4, type: 'date'}

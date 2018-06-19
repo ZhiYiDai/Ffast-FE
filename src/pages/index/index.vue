@@ -4,7 +4,6 @@
     width: 100%;
   }
 
-
   .backlog li {
     height: 70px;
     cursor: pointer;
@@ -31,11 +30,13 @@
     padding-top: 120px;
   }
 
-  .backlog-parent{
+  .backlog-parent {
     height: 565px
   }
-  .backlog-content{
-    color: #657180;font-size: 13px
+
+  .backlog-content {
+    color: #657180;
+    font-size: 13px
   }
 </style>
 <style>
@@ -86,6 +87,30 @@
           <!--<Button type="dashed" long @click="handleAdd" icon="plus-round">添加待办事项</Button>-->
         </Card>
       </i-col>
+      <i-col :span="18">
+        <Card :bordered="false" style="padding: 10px">
+          <row>
+            <i-col :span="6">
+              <NumberCircle :endVal="15652" leftText="本周访问量" rightText="人"></NumberCircle>
+            </i-col>
+            <i-col :span="6">
+              <NumberCircle :endVal="15652" leftText="本周访问量" rightText="人"></NumberCircle>
+            </i-col>
+            <i-col :span="6">
+              <NumberCircle :endVal="15652" leftText="本周访问量" rightText="人"></NumberCircle>
+            </i-col>
+            <i-col :span="6">
+              <NumberCircle :endVal="15652" leftText="本周访问量" rightText="人"></NumberCircle>
+            </i-col>
+          </row>
+
+          <row>
+            <div style="height: 427px"></div>
+          </row>
+        </Card>
+
+      </i-col>
+
 
     </Row>
 
@@ -93,7 +118,7 @@
 </template>
 <script>
   import DateUtils from 'utils/DateUtils';
-  import {NumberUd} from 'components/';
+  import {NumberUd, NumberCircle} from 'components/';
   import IndexCharts from './IndexCharts';
 
   export default {
@@ -125,6 +150,6 @@
     mounted () {
 
     },
-    components: {NumberUd, IndexCharts}
+    components: {NumberUd, IndexCharts, NumberCircle}
   };
 </script>

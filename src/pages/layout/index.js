@@ -1,9 +1,12 @@
-export { default as Navbar } from './navbar';
+export { default as Navbar } from './Navbar';
 
-export { default as Sidebar } from './sidebar';
+export { default as Sidebar } from './Sidebar';
 
-export { default as Levelbar } from './levelbar';
+export { default as Levelbar } from './Levelbar';
 
-export { default as AppMain } from './appMain';
+export { default as Content } from './Content';
 
-export { default as Main } from './index.vue';
+export { default as Main } from './Main.vue';
+
+export { default as Footer } from './Footer.vue';
+

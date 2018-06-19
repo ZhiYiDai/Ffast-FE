@@ -177,6 +177,9 @@
               this.result = JSON.stringify(res);
             });
             break;
+          default:
+            this.$Message.warning('请选择请求方式！');
+            break;
         }
       }
     },

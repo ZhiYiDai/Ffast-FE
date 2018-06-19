@@ -1,4 +1,8 @@
 <style scoped>
+  .search-more{
+    float: right;
+    margin-bottom: 15px;
+  }
 </style>
 <style>
 </style>
@@ -23,17 +27,22 @@
     <!--搜索筛选-->
     <FormDynamic v-if="showSearch"
                  ref="searchFrom"
-                 :data="tableOptions.searchDynamic"
+                 :data="searchExpand?tableOptions.searchDynamic:[tableOptions.searchDynamic[0]]"
                  :colHeight="45"
                  :paddingRight="10"
                  :placeholderLabel="true"
                  :label-width="tableOptions.searchLabelWidth">
       <template slot="append">
-        <i-col span="3" style="padding-left: 1px">
+        <div :span="tableOptions.searchDynamic.length>1?3:1" style="padding: 1px 1px 0 0;"  :class="{'search-more': tableOptions.searchDynamic.length>1}">
           <i-button type="ghost" icon="ios-search" @click="search">查询</i-button>
-        </i-col>
+          <i-button v-if="tableOptions.searchDynamic.length>1" type="text"
+                    :icon="searchExpand?'ios-arrow-up':'ios-arrow-down'" @click="searchExpandClick">{{searchExpand?'收 起':'展 开'}}
+          </i-button>
+        </div>
       </template>
+
     </FormDynamic>
+
     <!--数据表格-->
     <DataTable ref="table"
                :columns="tableOptions.columns"
@@ -44,7 +53,6 @@
                :local="tableOptions.local"
                :height="tableOptions.height"
                :showPage="tableOptions.showPage"
-
                @on-selection-change="selectionChange"
                @on-row-dblclick="rowDblclick"
                @on-row-click="rowClick">
@@ -95,6 +103,9 @@
         labelWidth: {
           default: 1
         },
+        height: {
+          default: 600
+        },
         searchLabelWidth: {
           default: 1
         },
@@ -109,39 +120,43 @@
         treeView: {}
       }
     },
-    data () {
+    data() {
       return {
-        deferred: false
+        deferred: false,
+        searchExpand: false
       };
     },
     computed: {
-      isSingle () {
+      isSingle() {
         return !(this.tableOptions.selection !== null && this.tableOptions.selection.length === 1);
       },
-      isMultiple () {
+      isMultiple() {
         return !(this.tableOptions.selection != null && this.tableOptions.selection.length > 0);
       },
-      createPerms () {
+      createPerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':create';
       },
-      updatePerms () {
+      updatePerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':update';
       },
-      deletePerms () {
+      deletePerms() {
         return this.tableOptions.permsPrefix == null ? null : this.tableOptions.permsPrefix + ':delete';
       },
-      isPopupEdit () {
+      isPopupEdit() {
         return this.tableOptions.editOptions && !this.tableOptions.editOptions.editPage;
-      }
+      },
     },
     methods: {
-      submitBefore (data) {
+      searchExpandClick() {
+        this.searchExpand = !this.searchExpand;
+      },
+      submitBefore(data) {
         if (this.tableOptions.editOptions.submitBefore) {
           this.tableOptions.editOptions.submitBefore(data);
         }
         return false;
       },
-      refreshTable (type) {
+      refreshTable(type) {
         this.tableOptions.selection = [];
         this.$refs.table.queryData();
         let tree = this.tableOptions.treeView;
@@ -150,17 +165,17 @@
           tree.$refs['tree'].queryData();
         }
       },
-      opened (from, data) {
+      opened(from, data) {
         if (this.tableOptions.editOptions.opened) {
           this.tableOptions.editOptions.opened(from, data);
         }
       },
-      setFromAfter (from, data) {
+      setFromAfter(from, data) {
         if (this.tableOptions.editOptions.setFromAfter) {
           this.tableOptions.editOptions.setFromAfter(from, data);
         }
       },
-      search () {
+      search() {
         this.$refs.searchFrom.submit((data) => {
           for (let i in data) {
             if (data[i] === null || data[i] === '') {
@@ -171,7 +186,7 @@
           }
         });
       },
-      getSelection () {
+      getSelection() {
         if (this.tableOptions.selection.length <= 0) {
           this.$Message.error('未选择操作项！');
           return null;
@@ -179,20 +194,20 @@
           return this.tableOptions.selection;
         }
       },
-      editSuccess (res) {
+      editSuccess(res) {
         this.refreshTable();
       },
       /**
        * 表格复选框选中事件
        */
-      selectionChange (selection) {
+      selectionChange(selection) {
         this.tableOptions.selection = selection;
         this.$emit('on-selection-change', selection);
       },
       /**
        * 双击表格行
        */
-      rowDblclick (data) {
+      rowDblclick(data) {
         if (this.tableOptions.updateUrl && this.tableOptions.editOptions) {
           this.$refs.popupEdit.open({
             title: '编辑' + this.tableOptions.title,
@@ -203,12 +218,12 @@
       /**
        * 单击表格行
        */
-      rowClick (data) {
+      rowClick(data) {
       },
       /**
        * 添加表格数据
        */
-      showEdit (postUrl, title, data) {
+      showEdit(postUrl, title, data) {
         let action = {
           title: title,
           postUrl: postUrl
@@ -223,7 +238,7 @@
           this.$refs.popupEdit.open(action, data);
         }
       },
-      tableAddData () {
+      tableAddData() {
         let data = {};
         if (this.tableOptions != null) {
           data[this.categoryField] = this.tableOptions.param[this.categoryField];
@@ -232,13 +247,13 @@
         }
         this.showEdit(this.tableOptions.createUrl, '添加' + this.tableOptions.title, data);
       },
-      openUpdateDialog (data) {
+      openUpdateDialog(data) {
         this.showEdit(this.tableOptions.updateUrl, '编辑' + this.tableOptions.title, data);
       },
       /**
        * 编辑表格数据
        */
-      tableEditData () {
+      tableEditData() {
         let selection = this.getSelection();
         if (selection != null && this.tableOptions.editOptions) {
           this.openUpdateDialog(selection[0]);
@@ -247,7 +262,7 @@
       /**
        * 删除表格数据
        */
-      tableDelData () {
+      tableDelData() {
         let selection = this.getSelection();
         if (selection != null) {
           let ids = [];
@@ -269,7 +284,7 @@
       /**
        * 表格字段绑定数据
        */
-      columnRenderData () {
+      columnRenderData() {
         if (this.tableOptions.columns != null) {
           for (let i = 0; i < this.tableOptions.columns.length; i++) {
             let col = this.tableOptions.columns[i];
@@ -322,9 +337,9 @@
         }
       }
     },
-    mounted () {
+    mounted() {
     },
-    created () {
+    created() {
       this.columnRenderData();
       setTimeout(() => {
         this.deferred = true;

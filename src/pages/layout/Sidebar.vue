@@ -12,7 +12,7 @@
     overflow-x: hidden;
   }
 
-  .layout-menu-left:hover{
+  .layout-menu-left:hover {
     overflow-y: auto;
   }
 
@@ -28,7 +28,7 @@
     height: 45px;
     margin: 20px 10px;
 
-    background: url("../../../static/assets/img/logo.png") no-repeat ;
+    background: url("../../../static/assets/img/logo.png") no-repeat;
   }
 
   .layout-menu-left-small .layout-logo-left {
@@ -135,7 +135,7 @@
 
 <script>
 
-  import common from '@/utils/common'
+  import common from '@/utils/common';
 
   export default {
     name: 'sidebar',
@@ -146,7 +146,7 @@
         menuData: null,
         activeName: '',
         openNames: []
-      }
+      };
     },
     created: function () {
       this.menuData = common.constructTree(OperatorUtils.getMenuData(), 'name');
@@ -154,7 +154,7 @@
     },
     computed: {},
     methods: {
-      setMenuHover(hover){
+      setMenuHover (hover) {
         if (this.menuSmall) {
           this.menuHover = hover;
         }
@@ -167,11 +167,14 @@
           }
         }
       },
-      updateCurMenu(){
+      updateCurMenu () {
         let curMenu = this.getMenu(this.$router.currentRoute.path);
         if (curMenu != null) {
           this.activeName = curMenu.id;
-          this.openNames[0] = curMenu.parentId;
+          this.openNames = [curMenu.parentId];
+          this.$nextTick(() => {
+            this.$refs['menu'].updateOpened();
+          });
         } else {
           this.activeName = '';
         }
@@ -183,5 +186,5 @@
       }
     },
     components: {}
-  }
+  };
 </script>

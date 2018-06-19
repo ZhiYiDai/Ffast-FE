@@ -150,7 +150,7 @@
       dataUrl: {},
       param: {},
       height: {
-        default: 500
+        default: 600
       }
     },
     data () {

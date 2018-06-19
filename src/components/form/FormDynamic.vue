@@ -85,7 +85,7 @@
                           :dataUrl="item.dataUrl"
                           :valField="item.valField"
                           :textField="item.textField"
-                          :placeholder="item.placeholder"
+                          :placeholder="getPlaceholder(item)"
                           @on-change="(val)=>{if(item.onChange!=null){item.onChange(val,fromData,mData)}}"
                           :multiple="item.multiple">
               </DataSelect>
@@ -96,7 +96,7 @@
                 transfer
                 type="time"
                 :disabled="item.disabled"
-                :placeholder="item.disabled?'':'选择时间'"
+                :placeholder="getPlaceholder(item)"
                 v-model="fromData[item.name]">
               </TimePicker>
             </template>
@@ -108,7 +108,7 @@
                 type="year"
                 format="yyyy"
                 :disabled="item.disabled"
-                :placeholder="item.disabled?'':'选择年份'"
+                :placeholder="getPlaceholder(item)"
                 v-model="fromData[item.name]">
               </DatePicker>
             </template>
@@ -119,7 +119,7 @@
                 style="width:100%"
                 type="date"
                 :disabled="item.disabled"
-                :placeholder="item.disabled?'':'选择日期'"
+                :placeholder="getPlaceholder(item)"
                 v-model="fromData[item.name]">
               </DatePicker>
             </template>
@@ -131,7 +131,7 @@
                 type="datetime"
                 format="yyyy-MM-dd HH:mm:ss"
                 :disabled="item.disabled"
-                :placeholder="item.disabled?'':'选择日期'"
+                :placeholder="getPlaceholder(item)"
                 v-model="fromData[item.name]">
               </DatePicker>
             </template>
@@ -143,7 +143,7 @@
                 type="datetimerange"
                 :format="item.format || 'yyyy-MM-dd HH:mm:ss'"
                 :disabled="item.disabled"
-                :placeholder="item.disabled?'':'选择日期段'"
+                :placeholder="getPlaceholder(item)"
                 v-model="fromData[item.name]">
               </DatePicker>
             </template>
@@ -286,6 +286,7 @@
     },
     created () {
       this.initForm(this.data);
+      this.reset();
     },
     mounted () {
     },
@@ -310,7 +311,6 @@
             }
           }
         }
-        this.reset();
       },
       getPlaceholder (item) {
         if (this.placeholderLabel) {
@@ -324,6 +324,18 @@
               break;
             case 'popText':
               result = item.disabled || item.readonly ? '' : '请选择...';
+              break;
+            case 'time':
+              result = item.disabled || item.readonly ? '' : '选择时间';
+              break;
+            case 'datetime': case 'date':
+              result = item.disabled || item.readonly ? '' : '选择日期';
+              break;
+            case 'datetimerange':
+              result = item.disabled || item.readonly ? '' : '选择时间段';
+              break;
+            case 'year':
+              result = item.disabled || item.readonly ? '' : '选择年份';
               break;
             default:
               result = '';

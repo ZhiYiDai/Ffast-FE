@@ -1,19 +1,38 @@
 <style scoped>
-  .layout-breadcrumb {
+  .levelbar-breadcrumb {
     padding: 12px 15px;
+    position: absolute;
+    left: 0;
+  }
+
+  .levelbar-tabs {
+    padding: 10px 12px 0px 15px;
+    position: absolute;
+    right: 0;
+  }
+
+  .levelbar-row {
+    height: 30px
+  }
+
+
+</style>
+<style>
+  .levelbar-tabs .ivu-tag, .levelbar-tabs .ivu-tag-border {
+    height: 26px !important;
+    line-height: 26px !important;
   }
 </style>
-
 <template>
 
-  <row style="height: 30px">
-    <Breadcrumb class="layout-breadcrumb" separator="/" :style="{float: breadcrumbFloat}">
+  <row class="levelbar-row">
+    <Breadcrumb class="levelbar-breadcrumb" separator="/">
       <Breadcrumb-item v-for="(item,index) in levelList" :key="item.name" :href="item.url">
         <Icon :type="item.icon" v-if="item.icon"></Icon>
         {{item.name}}
       </Breadcrumb-item>
     </Breadcrumb>
-    <div v-if="showTabs" style="padding: 10px 12px 0px 15px;" :style="{float: tabsFloat}">
+    <div v-if="showTabs" class="levelbar-tabs">
       <template v-if="pathList!=null && pathList.length>1" v-for="(item, index) in pathList">
         <Tag
           @click.native="tagClick(item.url)"
@@ -29,7 +48,7 @@
       </template>
     </div>
 
-  </row style="height: 30px">
+  </row>
 </template>
 
 <script>
@@ -39,29 +58,21 @@
       showTabs: {
         type: Boolean,
         default: false
-      },
-      breadcrumbFloat: {
-        type: String,
-        default: 'left'
-      },
-      tabsFloat: {
-        type: String,
-        default: 'right'
       }
     },
-    data() {
+    data () {
       return {
         levelList: null,
         pathList: [],
         curPath: '',
         hoverIndex: null
-      }
+      };
     },
     methods: {
-      getBreadcrumb() {
+      getBreadcrumb () {
         let matched = [];
-        let mainUrl= OperatorUtils.getMain();
-        matched.push({name: '首页', url: mainUrl, icon: 'home'})
+        let mainUrl = OperatorUtils.getMain();
+        matched.push({name: '首 页', url: mainUrl, icon: 'home'});
         let path = this.$route.path;
         let menuData = OperatorUtils.getMenuData();
         let isEditPage = false;
@@ -92,7 +103,7 @@
         }
         this.levelList = matched;
       },
-      addTab(data) {
+      addTab (data) {
         if (!this.showTabs || data === null) {
           return;
         }
@@ -106,29 +117,29 @@
         }
         this.pathList.push(data);
       },
-      tagClick(url) {
+      tagClick (url) {
         this.$router.push(url);
         this.hoverIndex = null;
       },
-      setHover(index) {
+      setHover (index) {
         this.hoverIndex = index;
       },
-      handleClose(index) {
+      handleClose (index) {
         if (this.pathList.length > 1) {
           this.pathList.splice(index, 1);
         }
       }
     },
-    created() {
+    created () {
       this.getBreadcrumb();
     },
     watch: {
-      $route() {
+      $route () {
         this.getBreadcrumb();
       }
     },
     components: {}
-  }
+  };
 </script>
 
 

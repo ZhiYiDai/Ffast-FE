@@ -4,7 +4,7 @@
       <i-col span="24">
         <FormDynamic ref="dynamic1" v-model="fromData" :data="dynamic1" :label-width="120">
           <template slot="append">
-            append
+            FormDynamic-append
           </template>
         </FormDynamic>
       </i-col>
@@ -18,6 +18,7 @@
                @on-submit-before="()=>{this.$Notice.open({title: 'on-submit-before',desc: '提交表单前'});}"
                @on-success="()=>{this.$Notice.open({title: 'on-success',desc: '提交成功'});}"
                :label-width="120">
+      <template slot="append">PopupEdit-append</template>
     </PopupEdit>
     <PopupSelect ref="popSelect" :content="userPage">
     </PopupSelect>
@@ -124,12 +125,19 @@
         value: 0,
         label: 'RadioLabel',
         data: [
-          {label: '选项1', value: 0}, {label: '选项2', value: 1},
-          {label: '选项3', value: 2}, {label: '选项4', value: 3}
+          {label: 'Option1', value: 0}, {label: 'Hide Checkbox', value: 1},
+          {label: 'Option3', value: 2}, {label: 'Option4', value: 3}
         ],
         onChange: (val, from, data) => {
           self.$Message.success('onChange');
           self.$set(data, 'editor', '<h2>Ffast-FE radio onChange ' + val + '</h2>');
+
+          if (val === 1) {
+            self.$set(from.checkboxData, 'hidden', true);
+          } else {
+            self.$set(from.checkboxData, 'hidden', false);
+          }
+
         }
       },
       {
@@ -172,7 +180,7 @@
           'popText',
         textField:
           'popSelectName',
-        onClick(fromData) {
+        onClick (fromData) {
           self.$refs['popSelect'].open((selection) => {
             console.log(selection[0].id);
             self.$set(fromData, 'popSelectId', selection[0].id);
@@ -211,14 +219,14 @@
         data: [
           {
             label: 'SetData',
-            onClick() {
+            onClick () {
               // 给表单设置数据
               self.$refs.dynamic1.setFormData({passwordData: 10001, textData: 'SetData', editor: '<h1>Fffast-FE</h1>'});
             }
           },
           {
             label: 'GetFormData',
-            onClick() {
+            onClick () {
               self.$refs.dynamic1.submit((param) => {
                 console.log(param);
                 alert(JSON.stringify(param));
@@ -230,7 +238,7 @@
           {
             // 弹出窗口编辑表单
             label: 'PopupWindow',
-            onClick() {
+            onClick () {
               self.$refs.popupEdit.open({
                 title: 'PopupEditWindow',
                 // 确认提交url
@@ -240,7 +248,7 @@
           },
           {
             label: 'GotoEditPage',
-            onClick() {
+            onClick () {
               self.editOptions.editSuccess = self.editSuccess;
               let action = {
                 // 窗口标题
@@ -269,7 +277,7 @@
   };
 
   export default {
-    data() {
+    data () {
       return {
         editOptions,
         dynamic1,
@@ -278,12 +286,12 @@
     },
     computed: {
       // 弹出选择页面
-      userPage() {
+      userPage () {
         return import('pages/sys/user');
       }
     },
     methods: {},
-    mounted() {
+    mounted () {
       self = this;
     },
     components: {

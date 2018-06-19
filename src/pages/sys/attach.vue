@@ -54,10 +54,6 @@
         {name: 'size', label: '文件大小', span: 4, type: 'text'},
         {name: 'extention', label: '文件后缀', span: 4, type: 'text'},
         {name: 'note', label: '备注', span: 4, type: 'text'}
-      ],
-      [
-        {name: 'creatorName', label: '创建人', span: 4, type: 'text'},
-        {name: 'createTime', label: '创建时间', span: 5, type: 'date'}
       ]
     ]
   };

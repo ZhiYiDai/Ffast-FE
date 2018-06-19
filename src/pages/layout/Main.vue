@@ -37,23 +37,23 @@
       <div class="ease-in-out" :class="menuSmall?'layout-right-small':'layout-right'">
         <Navbar :toggleClick="toggleClick"></Navbar>
         <Levelbar :showTabs="true"></Levelbar>
-        <AppMain :menuSmall="menuSmall"></AppMain>
+        <Content :menuSmall="menuSmall"></Content>
+        <Footer></Footer>
       </div>
     </Row>
   </div>
 </template>
 <script>
-  let timerCount = 0;
-  import { Navbar, Sidebar, AppMain, Levelbar } from './index.js';
-  import DateUtils from 'utils/DateUtils'
-  import Emitter from '@/utils/mixins/emitter'
+  import {Navbar, Sidebar, Content, Levelbar, Footer} from './index.js';
+  import Emitter from '@/utils/mixins/emitter';
+
   export default {
     name: 'Home',
     mixins: [Emitter],
     data () {
       return {
         menuSmall: false
-      }
+      };
     },
     computed: {},
     methods: {
@@ -75,8 +75,9 @@
     components: {
       Navbar,
       Sidebar,
-      AppMain,
-      Levelbar
+      Content,
+      Levelbar,
+      Footer
     }
-  }
+  };
 </script>

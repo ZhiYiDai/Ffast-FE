@@ -121,7 +121,8 @@
         {name: 'username', label: '用户名', span: 6, type: 'text'},
         {name: 'email', label: '邮箱', span: 6, type: 'text'},
         {name: 'tel', label: '手机号码', span: 6, type: 'text'},
-        {name: 'loginIp', label: '登录Ip', span: 6, type: 'text'},
+        {name: 'loginIp', label: '登录Ip', span: 6, type: 'text'}
+      ], [
         {
           name: 'status',
           label: '状态',
@@ -143,19 +144,19 @@
   import {CrudView} from 'components/';
 
   export default {
-    data () {
+    data() {
       return {
         tableOptions,
         treeOptions
       };
     },
     computed: {
-      isSingle () {
+      isSingle() {
         return !(this.tableOptions.selection != null && this.tableOptions.selection.length === 1);
       }
     },
     methods: {
-      roleResPassword () {
+      roleResPassword() {
         let selection = this.tableOptions.selection;
         if (selection != null) {
           this.$http.apiPost('/sys/user/reseting', {id: selection[0].id}).then((res) => {
@@ -172,7 +173,7 @@
         }
       }
     },
-    created () {
+    created() {
     },
     components: {CrudView}
   };

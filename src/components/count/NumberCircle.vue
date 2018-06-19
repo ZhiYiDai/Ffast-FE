@@ -2,9 +2,8 @@
 
   .circle-text {
     font-size: 13px;
-    color: #f2f2f2;
+    color: #5c6b77;
     line-height: 20px;
-
   }
 
   .circle-count {
@@ -15,22 +14,23 @@
 <style>
   .ivu-chart-circle-inner {
     padding-top: 0px;
+
   }
 </style>
 <template>
   <div class="circle-count">
-    <Circle :percent="percent" :stroke-width="4" :trail-width="2" :size="84" :stroke-color="strokeColor">
-      <NumberTo :endVal="endVal" :countStyle="countStyle">
-        <div v-if="rightText" slot="leftText" class="circle-text" style="padding-top: 12px">
-          　
-        </div>
+    <Circle :percent="percent" :stroke-width="6" :trail-width="6" :size="125" :stroke-color="strokeColor">
+      <NumberTo :endVal="endVal" :countStyle="countStyle" style="padding-top: 10px">
+        <template slot="leftText" >
+          <p class="circle-text">{{leftText}}</p>
+        </template>
         <div slot="rightText" class="circle-text">
           {{rightText}}
         </div>
       </NumberTo>
     </Circle>
     <div slot="leftText" class="circle-text">
-      <div style="font-weight: 800">{{title}}</div>
+      <div style="color: #5c6b77;font-size: 16px">{{title}}</div>
     </div>
   </div>
 
@@ -49,8 +49,9 @@
       strokeColor: null,
       unit: null,
       rightText: {},
+      leftText: {},
       countSize: {
-        default: 22
+        default: 30
       },
       textAlign: {
         default: 'center'
@@ -65,7 +66,7 @@
         unit2: [[5, '十万多'], [6, '百万多'], [7, '千万多']],
         countStyle: {
           fontSize: this.countSize + 'px',
-          color: '#fff'
+          color: '#5c6b77'
         }
       };
     },

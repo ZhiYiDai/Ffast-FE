@@ -1,5 +1,4 @@
 <style scoped>
-
 </style>
 
 <template>
@@ -10,7 +9,6 @@
    * 弹出式表单参数
    */
   const tableEditOptions = {
-
     width: 600,
     labelWidth: 70,
     dynamic: [
@@ -31,7 +29,6 @@
       [
         {name: 'identity', type: 'text', span: 12, label: '标识符'},
         {name: 'icon', type: 'text', span: 12, label: '图标'}
-
       ],
       [
         {name: 'weight', type: 'text', span: 12, label: '权重'}
@@ -135,12 +132,18 @@
         {name: 'name', label: '资源名', span: 4, type: 'text'},
         {name: 'identity', label: '标识符', span: 4, type: 'text'},
         {name: 'url', label: 'Url', span: 4, type: 'text'},
-        {name: 'status', label: '状态', span: 3, type: 'text'},
+        {
+          name: 'status',
+          type: 'select',
+          data: [{label: '显示', value: 1}, {label: '隐藏', value: 0}],
+          span: 4,
+          label: '状态'
+        },
         {
           name: 'resType',
           type: 'select',
           data: [{label: '菜单', value: 1}, {label: '权限', value: 2}],
-          span: 3,
+          span: 4,
           label: '类型'
         }
       ]
