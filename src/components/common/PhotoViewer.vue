@@ -98,6 +98,9 @@
       value: {
         default: false
       },
+      moveEnable: {
+        default: false
+      },
       picIds: {},
       imgList: {},
       curIndex: {
@@ -141,6 +144,9 @@
       },
       // 图片拖动
       startMove (event) {
+        if (!this.moveEnable) {
+          return;
+        }
         window.addEventListener('mousemove', this.move);
         window.addEventListener('touchmove', this.move);
         window.addEventListener('mouseup', this.leave);

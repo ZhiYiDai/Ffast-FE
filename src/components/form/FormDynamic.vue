@@ -169,7 +169,7 @@
                         :key="'switch'+index"
                         :disabled="item.disabled"
                         :trueValue="item.trueValue"
-                        @on-change="(val)=>{if(item.onChange!=null){item.onChange(val,mData,fromData)}}"
+                        @on-change="(val)=>{if(item.onChange!=null){item.onChange(val,fromData,mData)}}"
                         :falseValue="item.falseValue">
                 <span slot="open">{{item.openText}}</span>
                 <span slot="close">{{item.closeText}}</span>
@@ -179,7 +179,7 @@
             <template v-else-if="item.type==='radio'">
               <RadioGroup v-model="fromData[item.name]"
                           :type="item.button?'button':null"
-                          @on-change="(val)=>{if(item.onChange!=null){item.onChange(val,mData,fromData)}}">
+                          @on-change="(val)=>{if(item.onChange!=null){item.onChange(val,fromData,mData)}}">
                 <Radio v-for="(option, optionIndex) in item.data"
                        :key="'radio'+index+'_'+optionIndex"
                        :label="option.value==null?optionIndex:option.value">

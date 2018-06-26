@@ -133,9 +133,9 @@
           self.$set(data, 'editor', '<h2>Ffast-FE radio onChange ' + val + '</h2>');
 
           if (val === 1) {
-            self.$set(from.checkboxData, 'hidden', true);
+            self.$set(data.checkboxData, 'hidden', true);
           } else {
-            self.$set(from.checkboxData, 'hidden', false);
+            self.$set(data.checkboxData, 'hidden', false);
           }
 
         }
