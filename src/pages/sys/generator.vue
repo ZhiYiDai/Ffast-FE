@@ -491,23 +491,10 @@
         console.log(data);
       },
       save () {
-        //generatorDynamic;
-        //tableEdit
+        alert(JSON.stringify(this.$refs.dynamic.getData()));
+        alert(JSON.stringify(this.$refs.generatorDynamic.getData()));
+        alert(JSON.stringify(this.$refs.dynamic3.getData()));
 
-        this.$refs.generatorDynamic.submit((param) => {
-          console.log(param);
-          alert(JSON.stringify(param));
-        }, null);
-
-        this.$refs.dynamic3.submit((param) => {
-          console.log(param);
-          alert(JSON.stringify(param));
-        }, null);
-
-        this.$refs.dynamic.submit((param) => {
-          console.log(param);
-          alert(JSON.stringify(param));
-        }, null);
 
         alert(JSON.stringify(this.$refs.tableSearch.getData()));
         alert(JSON.stringify(this.$refs.tableEdit.getData()));

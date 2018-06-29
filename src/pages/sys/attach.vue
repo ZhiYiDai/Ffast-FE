@@ -74,7 +74,7 @@
             this.$http.handleError(res);
           } else {
             this.$Message.success('删除成功');
-//              this.refreshTable();
+            this.$refs['crudView'].$refs['crudTable'].refreshTable();
           }
         });
       }

@@ -14,6 +14,7 @@ const SysLogPage = resolve => require(['pages/sys/sysLog'], resolve);
 const RequestPage = resolve => require(['pages/sys/request'], resolve);
 const AttachPage = resolve => require(['pages/sys/attach'], resolve);
 const GeneratorPage = resolve => require(['pages/sys/generator'], resolve);
+const SchedulePage = resolve => require(['pages/sys/schedule'], resolve);
 
 const BacklogPage = resolve => require(['pages/work/backlog'], resolve);
 
@@ -45,6 +46,7 @@ const routes = [
       {path: '/attach', component: AttachPage, name: '附件管理'},
       {path: '/request', component: RequestPage, name: '接口测试'},
       {path: '/generator', component: GeneratorPage, name: '代码生成'},
+      {path: '/schedule', component: SchedulePage, name: '定时任务'},
       /**
        * 办公
        */
