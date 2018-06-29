@@ -172,14 +172,10 @@
       },
       {
         name: 'popSelectId',
-        span:
-          8,
-        label:
-          'PopupSelectLabel',
-        type:
-          'popText',
-        textField:
-          'popSelectName',
+        span: 8,
+        label: 'PopupSelectLabel',
+        type: 'popText',
+        textField: 'popSelectName',
         onClick (fromData) {
           self.$refs['popSelect'].open((selection) => {
             console.log(selection[0].id);

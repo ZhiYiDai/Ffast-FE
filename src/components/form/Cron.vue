@@ -1,96 +1,110 @@
-<style lang="less" scoped>
-  #changeContab {
-    .language {
-      position: absolute;
-      right: 25px;
-      z-index: 1;
-    }
-    .Tabs {
-      box-shadow: none;
-    }
-    .tabBody {
-      .i-row {
-        margin: 10px 0;
-        .long {
-          .Select {
-            width: 350px;
-          }
-        }
-        .input-number {
-          width: 110px;
-        }
-      }
-    }
-    .bottom {
-      width: 100%;
-      text-align: center;
-      margin-top: 5px;
-      position: relative;
-      .value {
-        font-size: 18px;
-        vertical-align: middle;
-      }
-    }
-    .cron-row{
-
-    }
+<style scoped>
+  .bottom {
+    width: 100%;
+    text-align: right;
+    margin-top: 5px;
+    position: relative;
   }
+
+  #changeContab {
+    margin-bottom: 5px;
+  }
+
+  .tabBody {
+    height: 420px;
+    padding-bottom: 5px;
+    width: 100%;
+  }
+
+  .value {
+    font-size: 18px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .cron-row {
+    display: block;
+  }
+
 </style>
 <style>
-  #changeContab i-row .ivu-radio-group-item {
+  #changeContab .cron-row .ivu-radio-group-item {
     display: inline-block !important;
     height: 40px !important;
     line-height: 40px !important;
   }
+
+  #changeContab .ivu-radio-group {
+    width: 100%;
+  }
+
+  .auto-width {
+    width: auto !important;
+    min-width: 80px;
+  }
+
+
 </style>
 <template>
   <div id="changeContab">
-    <Tabs>
+    <Tabs :animated="false">
       <TabPane name="second" :label="text.Seconds.name">
         <div class="tabBody">
           <RadioGroup vertical v-model="second.cronEvery">
-            <Radio label="1">{{text.Seconds.every}}</Radio>
-            <Radio label="2">{{text.Seconds.interval[0]}}
+            <Row>
+              <Radio label="1">{{text.Seconds.every}}</Radio>
+            </Row>
+            <Row class="cron-row">
+              <Radio label="2">{{text.Seconds.interval[0]}}</Radio>
               <input-number v-model="second.incrementIncrement" :min="1" :max="60"></input-number>
               {{text.Seconds.interval[1]||''}}
               <input-number v-model="second.incrementStart" :min="0" :max="59"></input-number>
               {{text.Seconds.interval[2]||''}}
-            </Radio>
-            <Radio class="long" label="3">{{text.Seconds.specific}}
+            </Row>
+            <Row class="cron-row">
+              <Row class="cron-row">
+                <Radio class="long" label="3">{{text.Seconds.specific}}</Radio>
+              </Row>
               <Select multiple v-model="second.specificSpecific">
-                <Option v-for="val in 60" :key="$index" :value="val-1">{{val-1}}</Option>
+                <Option v-for="val in 60" :key="val" :value="val-1">{{val-1}}</Option>
               </Select>
-            </Radio>
-            <Radio label="4">{{text.Seconds.cycle[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio label="4">{{text.Seconds.cycle[0]}}</Radio>
               <input-number v-model="second.rangeStart" :min="1" :max="60"></input-number>
               {{text.Seconds.cycle[1]||''}}
               <input-number v-model="second.rangeEnd" :min="0" :max="59"></input-number>
               {{text.Seconds.cycle[2]||''}}
-            </Radio>
+            </Row>
           </RadioGroup>
         </div>
       </TabPane>
       <TabPane name="minutes" :label="text.Minutes.name">
         <div class="tabBody">
           <RadioGroup vertical v-model="minute.cronEvery">
-            <Radio label="1">{{text.Minutes.every}}</Radio>
-            <Radio label="2">{{text.Minutes.interval[0]}}
+            <Row>
+              <Radio label="1">{{text.Minutes.every}}</Radio>
+            </Row>
+            <Row class="cron-row">
+              <Radio label="2">{{text.Minutes.interval[0]}}</Radio>
               <input-number v-model="minute.incrementIncrement" :min="1" :max="60"></input-number>
               {{text.Minutes.interval[1]}}
               <input-number v-model="minute.incrementStart" :min="0" :max="59"></input-number>
               {{text.Minutes.interval[2]||''}}
-            </Radio>
-            <Radio class="long" label="3">{{text.Minutes.specific}}
+            </Row>
+            <Row class="cron-row">
+              <Radio class="long" label="3">{{text.Minutes.specific}}</Radio>
               <Select multiple v-model="minute.specificSpecific">
-                <Option v-for="val in 60" :key="$index" :value="val-1">{{val-1}}</Option>
+                <Option v-for="val in 60" :key="val" :value="val-1">{{val-1}}</Option>
               </Select>
-            </Radio>
-            <Radio label="4">{{text.Minutes.cycle[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio label="4">{{text.Minutes.cycle[0]}}</Radio>
               <input-number v-model="minute.rangeStart" :min="1" :max="60"></input-number>
               {{text.Minutes.cycle[1]}}
               <input-number v-model="minute.rangeEnd" :min="0" :max="59"></input-number>
               {{text.Minutes.cycle[2]}}
-            </Radio>
+            </Row>
           </RadioGroup>
         </div>
       </TabPane>
@@ -98,27 +112,29 @@
 
         <div class="tabBody">
           <RadioGroup vertical v-model="hour.cronEvery">
-            <Radio label="1">{{text.Hours.every}}</Radio>
-
-            <Radio label="2">{{text.Hours.interval[0]}}
+            <Row>
+              <Radio label="1">{{text.Hours.every}}</Radio>
+            </Row>
+            <Row class="cron-row">
+              <Radio label="2">{{text.Hours.interval[0]}}</Radio>
               <input-number v-model="hour.incrementIncrement" :min="0" :max="23"></input-number>
               {{text.Hours.interval[1]}}
               <input-number v-model="hour.incrementStart" :min="0" :max="23"></input-number>
               {{text.Hours.interval[2]}}
-            </Radio>
-
-            <Radio class="long" label="3">{{text.Hours.specific}}
+            </Row>
+            <Row class="cron-row">
+              <Radio class="long" label="3">{{text.Hours.specific}}</Radio>
               <Select multiple v-model="hour.specificSpecific">
-                <Option v-for="val in 24" :key="$index" :value="val-1">{{val-1}}</Option>
+                <Option v-for="val in 24" :key="val" :value="val-1">{{val-1}}</Option>
               </Select>
-            </Radio>
-
-            <Radio label="4">{{text.Hours.cycle[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio label="4">{{text.Hours.cycle[0]}}</Radio>
               <input-number v-model="hour.rangeStart" :min="0" :max="23"></input-number>
               {{text.Hours.cycle[1]}}
               <input-number v-model="hour.rangeEnd" :min="0" :max="23"></input-number>
               {{text.Hours.cycle[2]}}
-            </Radio>
+            </Row>
           </RadioGroup>
         </div>
 
@@ -126,119 +142,142 @@
       <TabPane name="day" :label="text.Day.name">
         <div class="tabBody">
           <RadioGroup vertical v-model="day.cronEvery">
-            <Radio v-model="day.cronEvery" label="1">{{text.Day.every}}</Radio>
-            <Radio v-model="day.cronEvery" label="2">{{text.Day.intervalWeek[0]}}
+            <Row>
+              <Radio v-model="day.cronEvery" label="1">{{text.Day.every}}</Radio>
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="2">{{text.Day.intervalWeek[0]}}</Radio>
               <input-number v-model="week.incrementIncrement" :min="1" :max="7"></input-number>
               {{text.Day.intervalWeek[1]}}
-              <Select v-model="week.incrementStart">
-                <option v-for="val in 7" :key="val" :label="text.Week[val-1]" :value="val"></option>
+              <Select class="auto-width" v-model="week.incrementStart">
+                <Option v-for="val in 7" :key="val" :label="text.Week[val-1]" :value="val"></Option>
               </Select>
               {{text.Day.intervalWeek[2]}}
-            </Radio>
-            <Radio v-model="day.cronEvery" label="3">{{text.Day.intervalDay[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="3">{{text.Day.intervalDay[0]}}</Radio>
               <input-number v-model="day.incrementIncrement" :min="1" :max="31"></input-number>
               {{text.Day.intervalDay[1]}}
               <input-number v-model="day.incrementStart" :min="1" :max="31"></input-number>
               {{text.Day.intervalDay[2]}}
-            </Radio>
-
-            <Radio class="long" v-model="day.cronEvery" label="4">{{text.Day.specificWeek}}
-              <Select multiple v-model="week.specificSpecific">
+            </Row>
+            <Row class="cron-row">
+              <Radio class="long" v-model="day.cronEvery" label="4">{{text.Day.specificWeek}}</Radio>
+              <Select class="auto-width" multiple v-model="week.specificSpecific">
                 <Option v-for="val in 7"
-                        :key="$index"
+                        :key="val"
                         :label="text.Week[val-1]"
                         :value="['SUN','MON','TUE','WED','THU','FRI','SAT'][val-1]"
                 ></Option>
               </Select>
-            </Radio>
-
-            <Radio class="long" v-model="day.cronEvery" label="5">{{text.Day.specificDay}}
-              <Select multiple v-model="day.specificSpecific">
-                <Option v-for="val in 31" :key="$index" :value="val">{{val}}</Option>
+            </Row>
+            <Row class="cron-row">
+              <Radio class="long" v-model="day.cronEvery" label="5">{{text.Day.specificDay}}</Radio>
+              <Select class="auto-width" multiple v-model="day.specificSpecific">
+                <Option v-for="val in 31" :key="val" :value="val">{{val}}</Option>
               </Select>
-            </Radio>
-
-            <Radio v-model="day.cronEvery" label="6">{{text.Day.lastDay}}</Radio>
-            <Radio v-model="day.cronEvery" label="7">{{text.Day.lastWeekday}}</Radio>
-            <Radio v-model="day.cronEvery" label="8">{{text.Day.lastWeek[0]}}
-              <Select v-model="day.cronLastSpecificDomDay">
-                <Option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></Option>
+            </Row>
+            <Row>
+              <Radio v-model="day.cronEvery" label="6">{{text.Day.lastDay}}</Radio>
+            </Row>
+            <Row>
+              <Radio v-model="day.cronEvery" label="7">{{text.Day.lastWeekday}}</Radio>
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="8">{{text.Day.lastWeek[0]}}</Radio>
+              <Select placement="top" class="auto-width" v-model="day.cronLastSpecificDomDay">
+                <Option v-for="val in 7" :key="val" :label="text.Week[val-1]" :value="val"></Option>
               </Select>
               {{text.Day.lastWeek[1]||''}}
-            </Radio>
-            <Radio v-model="day.cronEvery" label="9">
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="9">
+                {{text.Day.beforeEndMonth[0]}}
+              </Radio>
               <input-number v-model="day.cronDaysBeforeEomMinus" :min="1" :max="31"></input-number>
-              {{text.Day.beforeEndMonth[0]}}
-            </Radio>
-
-            <Radio v-model="day.cronEvery" label="10">{{text.Day.nearestWeekday[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="10">{{text.Day.nearestWeekday[0]}}</Radio>
               <input-number v-model="day.cronDaysNearestWeekday" :min="1" :max="31"></input-number>
               {{text.Day.nearestWeekday[1]}}
-            </Radio>
-            <Radio v-model="day.cronEvery" label="11">{{text.Day.someWeekday[0]}}
-              <input-number v-model="week.cronNthDayNth" :min="1" :max="5"></input-number>
-              <Select v-model="week.cronNthDayDay">
-                <Option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></Option>
-              </Select>
+            </Row>
+            <Row class="cron-row">
+              <Radio v-model="day.cronEvery" label="11">{{text.Day.someWeekday[0]}}
+              </Radio>
               {{text.Day.someWeekday[1]}}
-            </Radio>
+              <input-number v-model="week.cronNthDayNth" :min="1" :max="5"></input-number>
+              <Select class="auto-width" v-model="week.cronNthDayDay">
+                <Option v-for="val in 7" :key="val" :label="text.Week[val-1]" :value="val"></Option>
+              </Select>
+
+
+            </Row>
           </RadioGroup>
         </div>
       </TabPane>
       <TabPane name="month" :label="text.Month.name">
         <div class="tabBody">
           <RadioGroup vertical v-model="month.cronEvery">
-            <Radio label="1">{{text.Month.every}}</Radio>
-            <Radio label="2">{{text.Month.interval[0]}}
+            <Row>
+              <Radio label="1">{{text.Month.every}}</Radio>
+            </Row>
+
+            <Row class="cron-row">
+              <Radio label="2">{{text.Month.interval[0]}}</Radio>
               <input-number v-model="month.incrementIncrement" :min="0" :max="12"></input-number>
               {{text.Month.interval[1]}}
               <input-number v-model="month.incrementStart" :min="0" :max="12"></input-number>
-            </Radio>
-            <Radio class="long" label="3">{{text.Month.specific}}
+            </Row>
+            <Row class="cron-row">
+              <Radio class="long" label="3">{{text.Month.specific}}</Radio>
               <Select multiple v-model="month.specificSpecific">
-                <Option v-for="val in 12" :key="$index" :label="val" :value="val"></Option>
+                <Option v-for="val in 12" :key="val" :label="val" :value="val"></Option>
               </Select>
-            </Radio>
-            <Radio label="4">{{text.Month.cycle[0]}}
+            </Row>
+            <Row class="cron-row">
+              <Radio label="4">{{text.Month.cycle[0]}}</Radio>
               <input-number v-model="month.rangeStart" :min="1" :max="12"></input-number>
               {{text.Month.cycle[1]}}
               <input-number v-model="month.rangeEnd" :min="1" :max="12"></input-number>
-            </Radio>
+            </Row>
+
           </RadioGroup>
         </div>
       </TabPane>
       <TabPane name="year" :label="text.Year.name">
         <div class="tabBody">
           <RadioGroup vertical v-model="year.cronEvery">
-            <i-row>
+            <Row>
               <Radio label="1">{{text.Year.every}}</Radio>
-            </i-row>
-            <i-row class=".cron-row">
+            </Row>
+            <Row class="cron-row">
               <Radio label="2">{{text.Year.interval[0]}}</Radio>
               <input-number v-model="year.incrementIncrement" :min="1" :max="99"></input-number>
               {{text.Year.interval[1]}}
               <input-number v-model="year.incrementStart" :min="2018" :max="2118"></input-number>
-            </i-row>
-            <i-row class=".cron-row">
+            </Row>
+            <Row class="cron-row">
               <Radio class="long" label="3">{{text.Year.specific}}</Radio>
-              <Select filterable multiple v-model="year.specificSpecific">
-                <Option v-for="val in 100" :key="$index" :label="2017+val" :value="2017+val"></Option>
+              <Select filterable multiple v-model="year.specificSpecific" class="auto-width" >
+                <Option v-for="val in 100" :key="val" :label="2017+val" :value="2017+val"></Option>
               </Select>
-            </i-row>
+            </Row>
+            <Row class="cron-row">
             <Radio label="4">{{text.Year.cycle[0]}}
               <input-number v-model="year.rangeStart" :min="2018" :max="2118"></input-number>
               {{text.Year.cycle[1]}}
               <input-number v-model="year.rangeEnd" :min="2018" :max="2118"></input-number>
             </Radio>
+            </Row>
           </RadioGroup>
         </div>
       </TabPane>
     </Tabs>
-    <div class="bottom">
-      <span class="value">{{this.cron}}</span>
-      <Button type="primary" @click="change">{{text.Save}}</Button>
-      <Button type="primary" @click="close">{{text.Close}}</Button>
-    </div>
+    <!--<div class="bottom">-->
+    <!--<span class="value">{{this.cron}}</span>-->
+    <!--<Button type="primary" @click="change">{{text.Save}}</Button>-->
+    <!--<Button type="primary" @click="close">{{text.Close}}</Button>-->
+    <!--</div>-->
   </div>
 </template>
 <script>
@@ -299,68 +338,134 @@
     Close: '关闭'
   };
 
+  const emptyFormat = (val) => {
+    return val === null ? '' : val;
+  };
+
+  const defaultValue = {
+    second: {
+      cronEvery: '',
+      incrementStart: 3,
+      incrementIncrement: 5,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: []
+    },
+    minute: {
+      cronEvery: '',
+      incrementStart: 3,
+      incrementIncrement: 5,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: []
+    },
+    hour: {
+      cronEvery: '',
+      incrementStart: 3,
+      incrementIncrement: 5,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: []
+    },
+    day: {
+      cronEvery: '',
+      incrementStart: 1,
+      incrementIncrement: 1,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: [],
+      cronLastSpecificDomDay: 1,
+      cronDaysBeforeEomMinus: null,
+      cronDaysNearestWeekday: null
+    },
+    week: {
+      cronEvery: '',
+      incrementStart: 1,
+      incrementIncrement: 1,
+      specificSpecific: [],
+      cronNthDayDay: 1,
+      cronNthDayNth: 1
+    },
+    month: {
+      cronEvery: '',
+      incrementStart: 3,
+      incrementIncrement: 5,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: []
+    },
+    year: {
+      cronEvery: '',
+      incrementStart: 2017,
+      incrementIncrement: 1,
+      rangeStart: null,
+      rangeEnd: null,
+      specificSpecific: []
+    }
+  };
+
   export default {
-    components: {ICol},
-    props: ['data', 'i18n'],
+
+    props: ['data'],
     data () {
       return {
         second: {
           cronEvery: '',
-          incrementStart: '3',
-          incrementIncrement: '5',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 3,
+          incrementIncrement: 5,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: []
         },
         minute: {
           cronEvery: '',
-          incrementStart: '3',
-          incrementIncrement: '5',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 3,
+          incrementIncrement: 5,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: []
         },
         hour: {
           cronEvery: '',
-          incrementStart: '3',
-          incrementIncrement: '5',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 3,
+          incrementIncrement: 5,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: []
         },
         day: {
           cronEvery: '',
-          incrementStart: '1',
-          incrementIncrement: '1',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 1,
+          incrementIncrement: 1,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: [],
           cronLastSpecificDomDay: 1,
-          cronDaysBeforeEomMinus: '',
-          cronDaysNearestWeekday: ''
+          cronDaysBeforeEomMinus: null,
+          cronDaysNearestWeekday: null
         },
         week: {
           cronEvery: '',
-          incrementStart: '1',
-          incrementIncrement: '1',
+          incrementStart: 1,
+          incrementIncrement: 1,
           specificSpecific: [],
           cronNthDayDay: 1,
-          cronNthDayNth: '1'
+          cronNthDayNth: 1
         },
         month: {
           cronEvery: '',
-          incrementStart: '3',
-          incrementIncrement: '5',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 3,
+          incrementIncrement: 5,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: []
         },
         year: {
           cronEvery: '',
-          incrementStart: '2017',
-          incrementIncrement: '1',
-          rangeStart: '',
-          rangeEnd: '',
+          incrementStart: 2017,
+          incrementIncrement: 1,
+          rangeStart: null,
+          rangeEnd: null,
           specificSpecific: []
         },
         output: {
@@ -392,6 +497,7 @@
             break;
           case '2':
             seconds = this.second.incrementStart + '/' + this.second.incrementIncrement;
+            console.log(seconds);
             break;
           case '3':
             this.second.specificSpecific.map(val => {
@@ -400,7 +506,7 @@
             seconds = seconds.slice(0, -1);
             break;
           case '4':
-            seconds = this.second.rangeStart + '-' + this.second.rangeEnd;
+            seconds = emptyFormat(this.second.rangeStart) + '-' + emptyFormat(this.second.rangeEnd);
             break;
         }
         return seconds;
@@ -422,7 +528,7 @@
             minutes = minutes.slice(0, -1);
             break;
           case '4':
-            minutes = this.minute.rangeStart + '-' + this.minute.rangeEnd;
+            minutes = emptyFormat(this.minute.rangeStart) + '-' + emptyFormat(this.minute.rangeEnd);
             break;
         }
         return minutes;
@@ -444,7 +550,7 @@
             hours = hours.slice(0, -1);
             break;
           case '4':
-            hours = this.hour.rangeStart + '-' + this.hour.rangeEnd;
+            hours = emptyFormat(this.hour.rangeStart) + '-' + emptyFormat(this.hour.rangeEnd);
             break;
         }
         return hours;
@@ -476,13 +582,13 @@
             days = 'LW';
             break;
           case '8':
-            days = this.day.cronLastSpecificDomDay + 'L';
+            days = emptyFormat(this.day.cronLastSpecificDomDay) + 'L';
             break;
           case '9':
-            days = 'L-' + this.day.cronDaysBeforeEomMinus;
+            days = 'L-' + emptyFormat(this.day.cronDaysBeforeEomMinus);
             break;
           case '10':
-            days = this.day.cronDaysNearestWeekday + 'W';
+            days = emptyFormat(this.day.cronDaysNearestWeekday) + 'W';
             break;
         }
         return days;
@@ -535,7 +641,7 @@
             months = months.slice(0, -1);
             break;
           case '4':
-            months = this.month.rangeStart + '-' + this.month.rangeEnd;
+            months = emptyFormat(this.month.rangeStart) + '-' + emptyFormat(this.month.rangeEnd);
             break;
         }
         return months;
@@ -557,7 +663,7 @@
             years = years.slice(0, -1);
             break;
           case '4':
-            years = this.year.rangeStart + '-' + this.year.rangeEnd;
+            years = emptyFormat(this.year.rangeStart) + '-' + emptyFormat(this.year.rangeEnd);
             break;
         }
         return years;
@@ -570,8 +676,21 @@
       getValue () {
         return this.cron;
       },
+      reset () {
+        this.$nextTick(() => {
+          let defaultVal = JSON.parse(JSON.stringify(defaultValue));
+          this.day = defaultVal.day;
+          this.second = defaultVal.second;
+          this.hour = defaultVal.hour;
+          this.minute = defaultVal.minute;
+          this.year = defaultVal.year;
+          this.week = defaultVal.week;
+          this.month = defaultVal.month;
+        });
+      },
       change () {
         this.$emit('change', this.cron);
+        this.$emit('input', this.cron);
         this.close();
       },
       close () {
@@ -593,8 +712,10 @@
           }
         }
       }
+
     },
     mounted () {
-    }
+    },
+    watch: {}
   };
 </script>
