@@ -2,42 +2,48 @@
 
 </style>
 <style>
-  .vertical-center-modal {
+  .cron-modal {
     z-index: 1058 !important;
+  }
+
+  .cron-modal .ivu-modal-body {
+    padding: 10px 0px 0px 0px;
+  }
+
+  .cron-modal .ivu-modal-close, .log-modal .ivu-modal-footer {
+    display: none !important;
+  }
+
+  .log-modal .ivu-modal-body {
+    padding: 5px !important;
   }
 </style>
 
 <template>
   <div class="schedule-centent">
     <CrudView ref='crudView' :tableOptions='tableOptions'>
-
       <template slot='toolbar'>
-
-
+        <span style="padding-left: 10px"></span>
         <i-button @click="runClick" type='ghost' shape='circle' icon='paper-airplane' :disabled='isMultiple'>执行
         </i-button>
         <i-button @click="resumeClick" type='ghost' shape='circle' icon='play' :disabled='isMultiple'>运行
         </i-button>
         <i-button @click="pauseClick" type='ghost' shape='circle' icon='pause' :disabled='isMultiple'>暂停
         </i-button>
+        <span style="padding-left: 10px"></span>
         <i-button @click="logClick" type='ghost' shape='circle' icon='clipboard' :disabled='isSingle'>执行日志
         </i-button>
-
-
       </template>
-
-
     </CrudView>
-    <!-- @close="cronPopover=false"-->
-    <Modal class-name="vertical-center-modal" width="500" title="Cron选择" v-model="cronSelect" @on-ok="changeCron">
+    <Modal class-name="vertical-center-modal cron-modal" width="400" v-model="cronSelect" @on-ok="changeCron">
       <Cron ref='cron'></Cron>
     </Modal>
 
-    <Modal class-name="vertical-center-modal" width="1000" title="定时任务执行日志" v-model="logModalVisible">
-      <DataTable :height="450" :columns="logColumns" dataUrl="/sys/scheduleLog/list"></DataTable>
-      <div slot="footer">
-
-      </div>
+    <Modal class-name=" log-modal" width="80%" title="定时任务执行日志" v-model="logModalVisible">
+      <DataTable lazy :param="{jobId:jobId}" :height="450" :columns="logColumns"
+                 dataUrl="/sys/scheduleLog/list"></DataTable>
+      <span slot="footer">
+      </span>
     </Modal>
 
 
@@ -46,22 +52,25 @@
 </template>
 
 <script>
+  import Spin from 'iview/src/components/spin/spin';
+
   let self = null;
 
   const logColumns = [
     {type: 'selection', width: 60, align: 'center'},
-    {key: 'name', title: '任务名称', width: 200},
-    {key: 'beanName', title: 'bean名称', width: 250},
-    {key: 'methodName', title: '方法名称', width: 200},
-    {key: 'params', title: '参数', width: 200},
-    {key: 'times', title: '耗时(毫秒)', width: 140},
+    {key: 'name', title: '任务名称', minWidth: 200},
+    {key: 'beanName', title: 'bean名称', minWidth: 250},
+    {key: 'methodName', title: '方法名称', minWidth: 200},
+    {key: 'params', title: '参数', minWidth: 200},
+    {key: 'times', title: '耗时(毫秒)', width: 140, sortable: true},
     {
-      key: 'status', title: '执行状态', width: 140, enum: ['失败', '成功']
+      key: 'status', title: '执行状态', width: 140, enum: ['失败', '成功'], sortable: true
     },
     {
       key: 'createTime',
-      title: '创建时间',
-      width: 200
+      title: '执行时间',
+      width: 200,
+      sortable: true
     }
   ];
 
@@ -69,7 +78,7 @@
    * 弹出式表单参数
    */
   const tableEditOptions = {
-    width: 600,
+    width: 680,
     labelWidth: 90,
     opened () {
       self.$refs['cron'].reset();
@@ -80,7 +89,7 @@
         {name: 'name', type: 'text', span: 24, label: '任务名称', rules: {required: true}},
         {name: 'beanName', type: 'text', span: 24, label: 'bean名称', rules: {required: true}},
         {name: 'methodName', type: 'text', span: 24, label: '方法名称', rules: {required: true}},
-        {name: 'params', type: 'text', span: 24, label: '参数名称', rules: {required: true}},
+        {name: 'params', type: 'text', span: 24, label: '参数'},
         {
           name: 'cronExpression',
           type: 'popText',
@@ -106,7 +115,7 @@
           falseValue: 0,
           rules: {required: true, type: 'number'}
         },
-        {name: 'note', type: 'text', textarea: {minRows: 2, maxRows: 3}, span: 24, label: '备注'}
+        {name: 'note', type: 'text', textarea: {minRows: 3, maxRows: 8}, span: 24, label: '备注'}
       ]
     ]
   };
@@ -138,6 +147,7 @@
         key: 'status',
         title: '运行状态',
         width: 120,
+        sortable: true,
         render: (h, params) => {
           const row = params.row;
           return h('i-switch', {
@@ -165,7 +175,7 @@
           ]);
         }
       },
-      {key: 'createTime', title: '创建时间', width: 160},
+      {key: 'createTime', title: '创建时间', width: 160, sortable: true},
       {key: 'note', title: '备注', minWidth: 100}
     ],
     searchDynamic: [
@@ -195,7 +205,8 @@
         cronVal: '',
         fromData: null,
         logModalVisible: false,
-        logColumns
+        logColumns,
+        jobId: 0
       };
     },
     computed: {
@@ -208,6 +219,8 @@
     },
     methods: {
       logClick () {
+        let selection = this.tableOptions.selection;
+        this.jobId = selection[0].id;
         this.logModalVisible = true;
       },
       changeCron () {
@@ -275,6 +288,9 @@
     created () {
       self = this;
     },
-    components: {CrudView, Cron, DataTable}
+    components: {
+      Spin,
+      CrudView, Cron, DataTable
+    }
   };
 </script>

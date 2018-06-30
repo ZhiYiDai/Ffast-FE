@@ -19,7 +19,7 @@
     selection: [],
     param: {},
     columns: [
-      {key: 'createTime', title: '时间', width: 160},
+      {key: 'createTime', title: '时间', width: 160,sortable: true},
       {key: 'creatorName', title: '操作人', width: 100},
       {key: 'operation', title: '操作项', width: 100},
       {key: 'content', title: '内容'}

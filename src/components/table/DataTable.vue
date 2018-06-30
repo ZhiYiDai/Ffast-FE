@@ -164,7 +164,7 @@
           page: 1,
           pageSize: 10,
           sortField: 'id',
-          sortOrder: 'asc'
+          sortOrder: 'desc'
         },
         tableData: []
       };
